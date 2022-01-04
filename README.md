@@ -30,18 +30,27 @@ Install all requirements.
 pip install -r requirements.txt
 ```
 
-## Run flask-server ####
+Contribute to the project
+--------------------------------
+Clone repository:
+```
+git clone https://github.com/lauderandtaiga/flandria.git
+cd flandria
+```
+Run flask-server:
 ```commandline
 FLASK_ENV=development FLASK_APP=app.py flask run --host=0.0.0.0 --port 5000
 ```
 
-## Initialize database
-Run the following commands with virtual environment.
+Initialize database
+--------------------------------
+This will create the database and the tables.
 ```commandline
 flask db upgrade
 ```
 
-## Populate database with data
+Populate database with data
+--------------------------------
 Download data from Florensia:
 ```commandline
 flask updater download
@@ -50,14 +59,16 @@ Update database:
 ```commandline
 flask updater database
 ```
+
+Additional commands
+--------------------------------
+Update player ranking. This includes guilds.
+```commandline
+flask tasks update-ranking
+```
 Update icons:
 ```commandline
 flask updater icons
-```
-
-## Update player ranking
-```commandline
-flask tasks update-ranking
 ```
 
 ## Installation ##
