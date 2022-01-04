@@ -12,6 +12,19 @@ Please also honor the License applied to the project.
 
 Thanks for all the support over the years.
 
+## Project structure
+![](C:\Projekte\Flandria\flandria\docs\flandria_stack.jpg)
+
+Folder            | Purpose
+------------------|----------
+database_updater  | Populate database with data from online resource
+docs              | Keep track of documentation files
+flandria-frontend | Frontend files (assets / javascript etc.)
+migrations        | Adjusting database scheme
+run_stack         | Deployment files (docker + config-files)
+webapp            | Backend files (application logic)
+
+
 Install all requirements.
 ```commandline
 pip install -r requirements.txt
