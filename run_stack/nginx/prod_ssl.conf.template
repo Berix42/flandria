@@ -1,0 +1,23 @@
+# Redirect to non-www domain
+server {
+    listen 80;
+    listen 443;
+    server_name www.${SITE_NAME};
+    include ssl.conf;
+    return 301 https://${SITE_NAME}$request_uri;
+}
+
+# HTTP to HTTPS redirection
+server {
+     listen 80;
+     server_name flandria.info;
+     return 301 https://${SITE_NAME}$request_uri;
+}
+
+# HTTPS -> flask (SSL termination)
+server {
+    listen 443 ssl;
+    include ssl.conf;
+    server_name ${SITE_NAME};
+    include forward_to_flask.conf;
+}
