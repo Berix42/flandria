@@ -45,20 +45,19 @@ WORKDIR /home/flandria_user/flandria
 
 # Install requirements
 # Alpine image does not contain some packages that needed for some of the requirements (e.g. Pillow) -> install them
-COPY requirements.txt .
 RUN apk add build-base jpeg-dev zlib-dev
+COPY requirements.txt .
 RUN pip install -r requirements.txt
 
 # Copy only needed files from build-stage or local repository
 COPY --from=build --chown=flandria_user /home/flandria_user/flandria/webapp webapp
-COPY --chown=flandria_user app.py .
+COPY --chown=flandria_user app.py run_stack/wsgi.py ./
 ADD --chown=flandria_user database_updater database_updater
 ADD --chown=flandria_user migrations migrations
 
 # Start webserver
-# TODO: Replace Flask internal server with application server for productional usage
+# Replace Flask internal server with Gunicorn (application server) for productional usage
+# See: https://www.toptal.com/flask/flask-production-recipes
 USER flandria_user
-ENV FLASK_ENV=development
-ENV FLASK_APP=app.py
 EXPOSE 5000
-ENTRYPOINT ["flask", "run", "--host=0.0.0.0", "--port=5000"]
+CMD gunicorn --workers 8 --bind 0.0.0.0:5000 wsgi:app --max-requests 10000 --timeout 5 --keep-alive 5 --log-level info
