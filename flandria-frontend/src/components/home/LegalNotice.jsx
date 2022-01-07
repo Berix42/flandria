@@ -14,6 +14,7 @@ const LegalNotice = () => {
       <h2>Contact Information</h2>
       <p>
         Giiku Games GmbH
+        <br />
         E-Mail:
         {' '}
         <a href="mailto:contact@flandria.info">info (at) giikugames.com</a>
