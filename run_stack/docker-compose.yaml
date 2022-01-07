@@ -1,0 +1,47 @@
+version: "3.9"
+services:
+  migration:
+    container_name: flandria_db_migration
+    build:
+      context: ..
+      dockerfile: run_stack/Dockerfile
+    command: flask db upgrade head
+    environment:
+      - APP_ENV=${APP_ENV:-prod}
+    volumes:
+      - type: bind
+        source: ../database.db
+        target: /home/flandria_user/flandria/database.db
+        read_only: false
+  flandria:
+    container_name: flandria_server
+    build:
+      context: ..
+      dockerfile: run_stack/Dockerfile
+    expose:
+      - "5000"
+    environment:
+      - APP_ENV=${APP_ENV:-prod}
+    volumes:
+      - type: bind
+        source: ../database.db
+        target: /home/flandria_user/flandria/database.db
+        read_only: false
+    depends_on:
+      - migration
+  nginx:
+    container_name: flandria_nginx
+    build:
+      context: nginx
+      dockerfile: Dockerfile-nginx
+    environment:
+      - APP_ENV=${APP_ENV:-prod}
+      - SITE_NAME=${SITE_NAME:-you.forgot.to.set.the.sitename.info}
+    volumes:
+      - type: bind
+        source: nginx/ssl_certs
+        target: /etc/nginx/ssl/flandria
+        read_only: true
+    ports:
+      - "80:80"
+      - "443:443"

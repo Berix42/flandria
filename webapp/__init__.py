@@ -15,30 +15,30 @@ from webapp.tasks import tasks_cli
 from webapp.utils import gzip_response, set_cors_header  # noqa: F401
 from webapp.loaders import user_lookup_loader
 
+import os
 
-def create_app(
-    debug: bool = False,
-    testing: bool = False
-) -> Flask:
+
+def create_app() -> Flask:
     """Creates and configures a flask application object.
-
-    Args:
-        debug (bool, optional): Whether the app should be run with the debug
-            config. Defaults to False.
-        testing (bool, optional): Whether the app should be run with the
-            testing config. Defaults to False.
 
     Returns:
         Flask: The application object.
     """
     app = Flask(__name__)
 
-    # Config
-    if testing:
-        app.config.from_object(TestingConfig)
-    else:
-        app.config.from_object(DevelopmentConfig if debug
-                               else ProductionConfig)
+    # Strings that determine the environment (dev/prod/test) of the current instance when set in env-var "APP_ENV"
+    DEV_STR = "dev"
+    PROD_STR = "prod"
+    TEST_STR = "test"
+    app_env_cases = {
+        DEV_STR: DevelopmentConfig,
+        PROD_STR: ProductionConfig,
+        TEST_STR: TestingConfig
+    }
+
+    # Load config corresponding to current environment
+    APP_ENV = os.environ.get("APP_ENV", DEV_STR)
+    app.config.from_object(app_env_cases[APP_ENV] if APP_ENV in app_env_cases else DevelopmentConfig)
 
     # Extensions
     register_extensions(app)
@@ -57,7 +57,7 @@ def create_app(
 
     # Register teardown functions
     # app.after_request(gzip_response)
-    if debug:
+    if APP_ENV == DEV_STR:
         app.after_request(set_cors_header)
 
     # Clear cache on startup

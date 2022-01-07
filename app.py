@@ -7,5 +7,5 @@ if __name__ == "__main__":
     load_dotenv()
 
     # Create and run app
-    app = create_app(debug=True)
+    app = create_app()
     app.run()
