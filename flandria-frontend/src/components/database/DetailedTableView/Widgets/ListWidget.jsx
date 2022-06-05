@@ -71,11 +71,11 @@ const ItemListWidgetItem = ({ tablename, item, subs }) => {
   return (
     <Link
       to={link}
-      className="flex flex-row items-center justify-start px-4 py-2 cursor-pointer group hover:bg-gray-200 dark:hover:bg-dark-4"
+      className="flex flex-row items-center justify-start px-4 py-2 cursor-pointer group hover:bg-slate-200 dark:hover:bg-dark-4"
     >
       {iconWidget}
       <div className="ml-1.5 flex flex-col">
-        <span className="text-gray-700 dark:text-white group-hover:text-gray-900 dark:group-hover:text-white">
+        <span className="text-slate-700 dark:text-white group-hover:text-slate-900 dark:group-hover:text-white">
           {name}
         </span>
         <ItemSubs
@@ -91,7 +91,7 @@ const ItemListWidgetItem = ({ tablename, item, subs }) => {
 };
 
 const TextListWidgetItem = ({ children }) => (
-  <p className="px-4 py-2 text-gray-700 whitespace-pre-line dark:text-white dark:text-opacity-70">
+  <p className="px-4 py-2 text-slate-700 whitespace-pre-line dark:text-white dark:text-opacity-70">
     {children}
   </p>
 );
@@ -108,7 +108,7 @@ const ListWidget = ({
       </CardHeader>
     )}
   >
-    <div className="overflow-y-auto divide-y divide-gray-200 max-h-112 dark:divide-dark-4">
+    <div className="overflow-y-auto divide-y divide-slate-200 max-h-112 dark:divide-dark-4">
       {children}
     </div>
   </Card>

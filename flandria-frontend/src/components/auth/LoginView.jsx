@@ -51,7 +51,7 @@ const LoginView = () => {
 
   return (
     <AuthWrapper>
-      <h2 className="text-2xl font-bold text-gray-900 md:text-5xl dark:text-white">Sign In</h2>
+      <h2 className="text-2xl font-bold text-slate-900 md:text-5xl dark:text-white">Sign In</h2>
       <form className="flex flex-col w-full gap-4" onSubmit={onSubmit}>
         <input
           className="text-input"
@@ -71,7 +71,7 @@ const LoginView = () => {
           {fieldErrors.map((error) => <span key={error}>{error}</span>)}
         </div>
         <div className="flex justify-center">
-          <button type="submit" className="px-16 py-2 text-xl font-semibold tracking-wider text-white uppercase bg-green-400 rounded-full outline-none dark:bg-green-600 focus-within:outline-none hover:bg-green-500 dark:hover:bg-green-500">
+          <button type="submit" className="px-16 py-2 text-xl font-semibold tracking-wider text-white uppercase bg-emerald-400 rounded-full outline-none dark:bg-emerald-600 focus-within:outline-none hover:bg-emerald-500 dark:hover:bg-emerald-500">
             Sign In
           </button>
         </div>

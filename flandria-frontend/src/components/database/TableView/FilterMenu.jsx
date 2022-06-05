@@ -6,7 +6,7 @@ import {
 } from '../../../constants';
 
 const SelectLabel = ({ children }) => (
-  <span className="px-2 py-2 text-lg font-semibold leading-5 tracking-wide text-gray-700 dark:text-white">{children}</span>
+  <span className="px-2 py-2 text-lg font-semibold leading-5 tracking-wide text-slate-700 dark:text-white">{children}</span>
 );
 
 const FilterMenu = ({

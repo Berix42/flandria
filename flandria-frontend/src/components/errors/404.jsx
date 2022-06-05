@@ -15,12 +15,12 @@ const Error404Page = () => {
           alt="404 error fungi"
         />
         <div>
-          <h2 className="text-3xl text-gray-900 dark:text-white">
+          <h2 className="text-3xl text-slate-900 dark:text-white">
             <span className="font-semibold">404</span>
             {' '}
             - Page not found
           </h2>
-          <small className="mt-2 text-gray-500 dark:text-white dark:text-opacity-70">
+          <small className="mt-2 text-slate-500 dark:text-white dark:text-opacity-70">
             You are seeing this error because you tried to visit a page
             that does not exist.
           </small>

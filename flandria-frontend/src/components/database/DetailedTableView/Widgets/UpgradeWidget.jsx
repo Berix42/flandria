@@ -4,9 +4,9 @@ import { armorTables, weaponTables } from '../../../../constants';
 import Card, { CardHeader, CardHeaderTitle } from '../../../shared/Card';
 
 const LabelValueItem = ({ label, value, isUpgraded }) => (
-  <div className="flex flex-row justify-between px-4 py-2 text-gray-700 dark:text-white">
+  <div className="flex flex-row justify-between px-4 py-2 text-slate-700 dark:text-white">
     <span className="font-semibold">{label}</span>
-    <span className={isUpgraded ? 'text-green-500 dark:text-green-400' : ''}>
+    <span className={isUpgraded ? 'text-emerald-500 dark:text-emerald-400' : ''}>
       {value}
       {isUpgraded}
     </span>
@@ -154,9 +154,9 @@ const UpgradeWidget = ({ tablename, obj, upgradeData }) => {
         </CardHeader>
     )}
     >
-      <div className="divide-y divide-gray-200 dark:divide-dark-4">
+      <div className="divide-y divide-slate-200 dark:divide-dark-4">
         <div className="flex flex-row items-center gap-2 px-4 py-2">
-          <span className="text-gray-700 dark:text-white">{upgradeLevel}</span>
+          <span className="text-slate-700 dark:text-white">{upgradeLevel}</span>
           <input
             className="flex-grow"
             type="range"

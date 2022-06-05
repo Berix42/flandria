@@ -113,7 +113,7 @@ const MapsOverview = () => {
                 </CardHeader>
               )}
             >
-              <div className="divide-y divide-gray-200 dark:divide-dark-4">
+              <div className="divide-y divide-slate-200 dark:divide-dark-4">
                 {section.urls.map((url) => (
                   <ClickableCardItem
                     to={url[1]}

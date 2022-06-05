@@ -33,7 +33,7 @@ const Statistics = () => {
 
   return (
     <div className="flex flex-col gap-4">
-      <span className="text-3xl font-semibold text-gray-700 dark:text-white">
+      <span className="text-3xl font-semibold text-slate-700 dark:text-white">
         Minimum Land Level:
         {' '}
         {minLevelLand}

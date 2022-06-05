@@ -8,7 +8,7 @@ import Icon from '../../../shared/Icon';
 const SkillDataAttribute = ({
   icon, text, tooltip,
 }) => (
-  <div data-tip={tooltip} className="cursor-default flex gap-x-0.5 items-center text-gray-700 dark:text-white">
+  <div data-tip={tooltip} className="cursor-default flex gap-x-0.5 items-center text-slate-700 dark:text-white">
     {icon}
     <span>{text}</span>
   </div>
@@ -19,7 +19,7 @@ const Skill = ({ skill }) => (
     <Icon tablename="skill" icon={skill.icon} className="mr-1.5 w-10 h-10" />
     <div className="flex flex-col flex-grow">
       <div className="flex items-center justify-between gap-16">
-        <span className="leading-none text-gray-700 whitespace-pre-wrap dark:text-white">
+        <span className="leading-none text-slate-700 whitespace-pre-wrap dark:text-white">
           {skill.name}
         </span>
         <div className="flex justify-end gap-x-2">
@@ -44,7 +44,7 @@ const Skill = ({ skill }) => (
           <ReactTooltip effect="solid" />
         </div>
       </div>
-      <span className="text-sm leading-5 text-gray-500 whitespace-pre-line dark:text-white dark:text-opacity-70">
+      <span className="text-sm leading-5 text-slate-500 whitespace-pre-line dark:text-white dark:text-opacity-70">
         {formatTextLinebreaks(skill.description)}
       </span>
     </div>
@@ -62,7 +62,7 @@ const SkillWidget = ({ skills }) => {
         </CardHeader>
         )}
     >
-      <div className="divide-y divide-gray-200 dark:divide-dark-4">
+      <div className="divide-y divide-slate-200 dark:divide-dark-4">
         {skills.map((skill) => <Skill key={skill.code} skill={skill} />)}
       </div>
     </Card>

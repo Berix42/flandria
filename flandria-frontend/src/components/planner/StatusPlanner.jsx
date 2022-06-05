@@ -10,7 +10,7 @@ import {
 } from './constants';
 
 const LabelValuePair = ({ label, value, labelClassname = '' }) => (
-  <div className="flex justify-between text-gray-700 gap-x-2 dark:text-white">
+  <div className="flex justify-between text-slate-700 gap-x-2 dark:text-white">
     <span className={`font-semibold text-right ${labelClassname}`}>{label}</span>
     <span className="tabular-nums">{value}</span>
   </div>
@@ -19,12 +19,12 @@ const LabelValuePair = ({ label, value, labelClassname = '' }) => (
 const StatusButton = ({
   label, value, onIncrement, onDecrement,
 }) => (
-  <div className="flex items-center justify-between text-gray-900 dark:text-white">
+  <div className="flex items-center justify-between text-slate-900 dark:text-white">
     <span className="flex-grow">{label}</span>
 
     <div className="flex items-center gap-2">
       <button
-        className="flex items-center justify-center w-4 h-4 font-extrabold text-center text-black bg-gray-200 border border-gray-500 rounded-md outline-none hover:bg-gray-300 focus-within:outline-none"
+        className="flex items-center justify-center w-4 h-4 font-extrabold text-center text-black bg-slate-200 border border-slate-500 rounded-md outline-none hover:bg-slate-300 focus-within:outline-none"
         type="button"
         onClick={onDecrement}
       >
@@ -32,7 +32,7 @@ const StatusButton = ({
       </button>
       <span>{value}</span>
       <button
-        className="flex items-center justify-center w-4 h-4 font-extrabold text-center text-black bg-gray-200 border border-gray-500 rounded-md outline-none hover:bg-gray-300 focus-within:outline-none"
+        className="flex items-center justify-center w-4 h-4 font-extrabold text-center text-black bg-slate-200 border border-slate-500 rounded-md outline-none hover:bg-slate-300 focus-within:outline-none"
         type="button"
         onClick={onIncrement}
       >
@@ -247,7 +247,7 @@ const StatusPlanner = ({ classname, statusData, hash }) => {
         <CardHeader>
           <div className="grid grid-cols-1 gap-2 md:grid-cols-2">
             <div>
-              <span className="font-semibold text-gray-700 dark:text-white">Level Land</span>
+              <span className="font-semibold text-slate-700 dark:text-white">Level Land</span>
               <Select
                 classNamePrefix="react-select"
                 options={levelLandOptions}
@@ -256,7 +256,7 @@ const StatusPlanner = ({ classname, statusData, hash }) => {
               />
             </div>
             <div>
-              <span className="font-semibold text-gray-700 dark:text-white">Level Sea</span>
+              <span className="font-semibold text-slate-700 dark:text-white">Level Sea</span>
               <Select
                 classNamePrefix="react-select"
                 options={levelSeaOptions}
@@ -265,7 +265,7 @@ const StatusPlanner = ({ classname, statusData, hash }) => {
               />
             </div>
           </div>
-          <p className="mt-2 text-sm leading-none text-gray-500 dark:text-white dark:text-opacity-70">
+          <p className="mt-2 text-sm leading-none text-slate-500 dark:text-white dark:text-opacity-70">
             Results may be off by up to 1-2.
             Stats from skills are
             {' '}
@@ -276,8 +276,8 @@ const StatusPlanner = ({ classname, statusData, hash }) => {
         </CardHeader>
       )}
     >
-      <div className="flex flex-col gap-5 px-2 py-4 divide-y divide-gray-200 sm:px-4 lg:px-6 dark:divide-dark-4">
-        <div className="flex flex-row justify-around text-gray-700 dark:text-white">
+      <div className="flex flex-col gap-5 px-2 py-4 divide-y divide-slate-200 sm:px-4 lg:px-6 dark:divide-dark-4">
+        <div className="flex flex-row justify-around text-slate-700 dark:text-white">
           <span>
             Points Left:
             {' '}
@@ -339,7 +339,7 @@ const StatusPlanner = ({ classname, statusData, hash }) => {
             onDecrement={(e) => decrementButtonClicked(e, 'will', will, setWill)}
           />
           <div className="flex justify-end col-span-2 mt-2">
-            <span className="text-xs text-gray-500 dark:text-white dark:text-opacity-70">
+            <span className="text-xs text-slate-500 dark:text-white dark:text-opacity-70">
               Click ± 1. Shift-Click ± 15.
             </span>
           </div>

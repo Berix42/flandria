@@ -11,7 +11,7 @@ const EffectStatsWidget = ({ effects }) => {
     >
       {getEffectStrings(effects).map((effectString) => (
         <div key={effectString} className="flex items-center px-4 py-2">
-          <span className="text-gray-700 dark:text-white">{effectString}</span>
+          <span className="text-slate-700 dark:text-white">{effectString}</span>
         </div>
       ))}
     </ListWidget>

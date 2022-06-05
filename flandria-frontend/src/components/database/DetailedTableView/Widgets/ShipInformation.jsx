@@ -82,10 +82,10 @@ const ShipInformation = ({ tablename, obj }) => {
         </CardHeader>
         )}
     >
-      <div className="divide-y divide-gray-200 dark:divide-dark-4">
+      <div className="divide-y divide-slate-200 dark:divide-dark-4">
         {labels.map((labelItem) => (
           <div key={labelItem.label} className="flex flex-col px-4 py-2">
-            <div className="flex flex-row justify-between text-gray-700 dark:text-white">
+            <div className="flex flex-row justify-between text-slate-700 dark:text-white">
               <span className="font-semibold">{labelItem.label}</span>
               <span>{labelItem.value}</span>
             </div>

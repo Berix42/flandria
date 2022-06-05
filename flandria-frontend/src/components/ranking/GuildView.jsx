@@ -41,7 +41,7 @@ const GuildView = () => {
 
   return (
     <>
-      <div className="flex items-end justify-between pb-3 border-b border-gray-200 dark:border-dark-3">
+      <div className="flex items-end justify-between pb-3 border-b border-slate-200 dark:border-dark-3">
         <div>
           <Breadcrumbs
             items={[
@@ -52,7 +52,7 @@ const GuildView = () => {
             ]}
           />
           <div className="flex items-center mt-2">
-            <h2 className="mt-0 text-2xl font-semibold text-gray-700 md:text-3xl dark:text-white">
+            <h2 className="mt-0 text-2xl font-semibold text-slate-700 md:text-3xl dark:text-white">
               <span>{data.guild.name}</span>
             </h2>
           </div>

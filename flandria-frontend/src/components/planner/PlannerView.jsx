@@ -85,7 +85,7 @@ const PlannerView = () => {
 
   return (
     <>
-      <div className="flex flex-col pb-3 border-b border-gray-200 dark:border-dark-3">
+      <div className="flex flex-col pb-3 border-b border-slate-200 dark:border-dark-3">
         <div>
           <Breadcrumbs
             items={[
@@ -101,14 +101,14 @@ const PlannerView = () => {
               icons={icons}
             />
             )}
-            <h2 className="flex items-center mt-0 text-2xl font-semibold text-gray-700 md:text-3xl dark:text-white gap-x-4">
+            <h2 className="flex items-center mt-0 text-2xl font-semibold text-slate-700 md:text-3xl dark:text-white gap-x-4">
               {tablenameToTitle(classname)}
               {classname !== 'ship' && (
                 <Link
                   to={`/planner/${classname}/builds`}
                   type="button"
                   role="button"
-                  className="flex items-center gap-x-1 px-3 py-1.5 text-xl text-white bg-yellow-600 rounded-md hover:bg-yellow-700"
+                  className="flex items-center gap-x-1 px-3 py-1.5 text-xl text-white bg-amber-600 rounded-md hover:bg-amber-700"
                 >
                   <HiCollection className="w-6 h-6" />
                   Builds

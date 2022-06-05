@@ -3,15 +3,15 @@ import { LazyLoadImage } from 'react-lazy-load-image-component';
 import { getImagePath } from '../../helpers';
 
 const monsterMapping = {
-  '-1': 'border-gray-200 dark:border-dark-4',
-  0: 'border-gray-200 dark:border-dark-4',
+  '-1': 'border-slate-200 dark:border-dark-4',
+  0: 'border-slate-200 dark:border-dark-4',
   1: 'border-monster-grade-1',
   2: 'border-monster-grade-2',
   3: 'border-monster-grade-3',
 };
 
 const itemMapping = {
-  '-1': 'border-gray-200 dark:border-dark-4',
+  '-1': 'border-slate-200 dark:border-dark-4',
   0: 'border-item-grade-0',
   1: 'border-item-grade-1',
   2: 'border-item-grade-2',
@@ -45,7 +45,7 @@ const Icon = ({
   const src = getImagePath(`${imagePathSuffix}/${icon}`);
 
   // Border Color
-  let borderColor = 'border-gray-200 dark:border-dark-4';
+  let borderColor = 'border-slate-200 dark:border-dark-4';
   if (tablename === 'monster') {
     borderColor = monsterMapping[rareGrade];
   } else {

@@ -103,7 +103,7 @@ const GuildOverview = () => {
   return (
     <>
       {isLoading && (<TopBarProgress />)}
-      <div className="flex items-end justify-between pb-3 border-b border-gray-200 dark:border-dark-3">
+      <div className="flex items-end justify-between pb-3 border-b border-slate-200 dark:border-dark-3">
         <div>
           <Breadcrumbs
             items={[
@@ -112,7 +112,7 @@ const GuildOverview = () => {
             ]}
           />
           <div className="flex items-center mt-2">
-            <h2 className="mt-0 text-2xl font-semibold text-gray-700 md:text-3xl dark:text-white">
+            <h2 className="mt-0 text-2xl font-semibold text-slate-700 md:text-3xl dark:text-white">
               Guilds
             </h2>
           </div>
