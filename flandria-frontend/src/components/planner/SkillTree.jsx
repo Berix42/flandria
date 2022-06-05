@@ -383,7 +383,8 @@ class SkillTree extends React.Component {
     const { classname } = this.props;
 
     if (this.plannerDivRef.current) {
-      toBlob(this.plannerDivRef.current,
+      toBlob(
+        this.plannerDivRef.current,
         {
           filter: (node) => {
             if (node.id && node.id.includes('excluded-in-image')) {
@@ -391,7 +392,8 @@ class SkillTree extends React.Component {
             }
             return true;
           },
-        }).then((blob) => {
+        },
+      ).then((blob) => {
         window.saveAs(blob, `skilltree-${classname}`);
       });
     }

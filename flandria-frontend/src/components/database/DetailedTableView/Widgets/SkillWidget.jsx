@@ -8,12 +8,10 @@ import Icon from '../../../shared/Icon';
 const SkillDataAttribute = ({
   icon, text, tooltip,
 }) => (
-  <>
-    <div data-tip={tooltip} className="cursor-default flex gap-x-0.5 items-center text-gray-700 dark:text-white">
-      {icon}
-      <span>{text}</span>
-    </div>
-  </>
+  <div data-tip={tooltip} className="cursor-default flex gap-x-0.5 items-center text-gray-700 dark:text-white">
+    {icon}
+    <span>{text}</span>
+  </div>
 );
 
 const Skill = ({ skill }) => (
