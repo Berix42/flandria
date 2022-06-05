@@ -100,7 +100,7 @@ const MapCanvas = ({
       />
       {(hoverPoint && showTooltip) && (
       <div
-        className="absolute z-10 flex items-center px-1.5 py-1 text-gray-700 bg-white rounded-sm shadow-md dark:bg-dark-3 dark:text-white"
+        className="absolute z-10 flex items-center px-1.5 py-1 text-slate-700 bg-white rounded-sm shadow-md dark:bg-dark-3 dark:text-white"
         style={{
           top: mapRef.current.offsetTop + hoverPoint.y - 10,
           left: mapRef.current.offsetLeft + hoverPoint.x + 25,

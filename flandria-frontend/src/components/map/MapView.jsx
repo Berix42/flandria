@@ -22,7 +22,7 @@ const ToggleMonsterButton = ({
         onToggleActive(monster);
       }
     }}
-    className={`flex px-4 py-2 text-gray-700 rounded-lg cursor-pointer dark:text-white outline-none box-border border-2 border-white dark:border-dark-4
+    className={`flex px-4 py-2 text-slate-700 rounded-lg cursor-pointer dark:text-white outline-none box-border border-2 border-white dark:border-dark-4
               ${isActive ? 'bg-white dark:bg-dark-4 shadow-sm' : ''}`}
   >
     <Icon
@@ -105,7 +105,7 @@ const MapView = () => {
 
   return (
     <>
-      <div className="flex flex-col pb-3 border-b border-gray-200 dark:border-dark-3">
+      <div className="flex flex-col pb-3 border-b border-slate-200 dark:border-dark-3">
         <div>
           <Breadcrumbs
             items={[
@@ -114,14 +114,14 @@ const MapView = () => {
             ]}
           />
           <div className="flex items-center mt-2">
-            <h2 className="mt-0 text-2xl font-semibold text-gray-700 md:text-3xl dark:text-white">
+            <h2 className="mt-0 text-2xl font-semibold text-slate-700 md:text-3xl dark:text-white">
               {data.name}
             </h2>
           </div>
         </div>
       </div>
       <div className="flex flex-col items-center mt-3">
-        <div className="flex flex-row gap-5 text-gray-700 dark:text-white">
+        <div className="flex flex-row gap-5 text-slate-700 dark:text-white">
           <button type="button" onClick={() => toggleAll(true)}>All On</button>
           <button type="button" onClick={() => toggleAll(false)}>All Off</button>
         </div>

@@ -434,14 +434,14 @@ class SkillTree extends React.Component {
               />
             </div>
             <div className="flex items-center justify-center col-span-2 gap-6 mt-2">
-              <span className="text-gray-700 dark:text-white">
+              <span className="text-slate-700 dark:text-white">
                 Points Left:
                 {' '}
                 <span className="tabular-nums">
                   {pointsLeft}
                 </span>
               </span>
-              <span className="text-gray-700 dark:text-white">
+              <span className="text-slate-700 dark:text-white">
                 Points Used:
                 {' '}
                 <span className="tabular-nums">
@@ -452,7 +452,7 @@ class SkillTree extends React.Component {
                 onClick={() => this.saveAsImage()}
                 type="button"
                 id="excluded-in-image"
-                className="flex items-center gap-1 px-2 py-1 text-white bg-green-500 rounded-md hover:bg-green-600"
+                className="flex items-center gap-1 px-2 py-1 text-white bg-emerald-500 rounded-md hover:bg-emerald-600"
               >
                 <HiDownload className="w-4 h-4" />
                 Image
@@ -494,7 +494,7 @@ class SkillTree extends React.Component {
                 onLevelUpRequest={this.onSkillLevelUpRequest}
               />
             ))}
-            <span className="absolute bottom-0 right-0 text-xs text-gray-500 dark:text-white dark:text-opacity-70">
+            <span className="absolute bottom-0 right-0 text-xs text-slate-500 dark:text-white dark:text-opacity-70">
               Click ± 1. Shift-Click Max.
             </span>
           </div>

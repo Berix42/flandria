@@ -97,7 +97,7 @@ const BuildsView = (props) => {
   return (
     <>
       {isLoading && (<TopBarProgress />)}
-      <div className="flex flex-col pb-3 border-b border-gray-200 dark:border-dark-3">
+      <div className="flex flex-col pb-3 border-b border-slate-200 dark:border-dark-3">
         <div className="flex flex-row items-end justify-between">
           <div>
             <Breadcrumbs
@@ -107,7 +107,7 @@ const BuildsView = (props) => {
                 { text: 'Builds', url: `/planner/${match.params.classname}/builds` },
               ]}
             />
-            <h2 className="mt-2 text-2xl font-semibold text-gray-700 md:text-3xl dark:text-white">
+            <h2 className="mt-2 text-2xl font-semibold text-slate-700 md:text-3xl dark:text-white">
               Builds
               {' '}
               {tablenameToTitle(match.params.classname)}
@@ -135,9 +135,9 @@ const BuildsView = (props) => {
               <Link
                 key={build.id}
                 to={link}
-                className="flex flex-col rounded-md cursor-pointer bg-gray-50 dark:bg-dark-3 hover:animate-scale"
+                className="flex flex-col rounded-md cursor-pointer bg-slate-50 dark:bg-dark-3 hover:animate-scale"
               >
-                <div className="flex justify-between px-4 py-2 bg-gray-200 dark:bg-dark-1 rounded-t-md">
+                <div className="flex justify-between px-4 py-2 bg-slate-200 dark:bg-dark-1 rounded-t-md">
                   <div className="flex items-center space-x-2">
                     <IconGroup
                       icons={[
@@ -146,7 +146,7 @@ const BuildsView = (props) => {
                       ]}
                       space="-space-x-3"
                     />
-                    <h3 className="font-semibold text-gray-900 dark:text-white">{build.build_title}</h3>
+                    <h3 className="font-semibold text-slate-900 dark:text-white">{build.build_title}</h3>
                   </div>
                   <div className="flex space-x-0.5 items-center">
                     {isAuthenticated() ? (
@@ -154,7 +154,7 @@ const BuildsView = (props) => {
                         <button
                           type="button"
                           onClick={(e) => onStarClick(e, build.id, userHasLiked)}
-                          className={`flex gap-x-0.5 items-center transition-colors duration-75 ${userHasLiked ? 'hover:text-red-400 dark:hover:text-red-500 text-blue-500 dark:text-blue-500' : 'hover:text-blue-400 dark:hover:text-blue-500 text-gray-700 dark:text-white'}`}
+                          className={`flex gap-x-0.5 items-center transition-colors duration-75 ${userHasLiked ? 'hover:text-red-400 dark:hover:text-red-500 text-blue-500 dark:text-blue-500' : 'hover:text-blue-400 dark:hover:text-blue-500 text-slate-700 dark:text-white'}`}
                         >
                           {userHasLiked ? (
                             <AiFillStar class="w-6 h-6" />
@@ -173,7 +173,7 @@ const BuildsView = (props) => {
                     ) : (
                       <button
                         type="button"
-                        className="flex gap-x-0.5 items-center text-gray-700 dark:text-white"
+                        className="flex gap-x-0.5 items-center text-slate-700 dark:text-white"
                       >
                         <AiOutlineStar class="w-6 h-6" />
                         {build.stars.length}
@@ -183,12 +183,12 @@ const BuildsView = (props) => {
                 </div>
                 {build.build_description.length > 0 && (
                 <div className="flex-grow px-4 py-2">
-                  <p className="text-sm text-gray-700 dark:text-white dark:text-opacity-75">
+                  <p className="text-sm text-slate-700 dark:text-white dark:text-opacity-75">
                     {build.build_description}
                   </p>
                 </div>
                 )}
-                <div className="px-4 py-2 text-sm text-gray-500 dark:text-white dark:text-opacity-50">
+                <div className="px-4 py-2 text-sm text-slate-500 dark:text-white dark:text-opacity-50">
                   <span>
                     Posted by
                     {' '}

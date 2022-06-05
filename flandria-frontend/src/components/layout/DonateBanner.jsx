@@ -9,7 +9,7 @@ const DonateBanner = () => {
   const [, setCookie] = useCookies();
 
   return (
-    <div className="fixed bottom-0 right-0 z-50 bg-white border border-gray-200 rounded-sm shadow-2xl md:max-w-lg md:right-4 md:bottom-4 dark:bg-dark-3 dark:border-dark-4">
+    <div className="fixed bottom-0 right-0 z-50 bg-white border border-slate-200 rounded-sm shadow-2xl md:max-w-lg md:right-4 md:bottom-4 dark:bg-dark-3 dark:border-dark-4">
       <div className="relative px-10 py-5">
         <button
           type="button"
@@ -18,8 +18,8 @@ const DonateBanner = () => {
         >
           <HiOutlineX className="w-5 h-5 animate-bounce" />
         </button>
-        <span className="text-2xl font-semibold text-gray-900 dark:text-white">Support us! ❤</span>
-        <p className="text-gray-700 dark:text-white dark:text-opacity-70">
+        <span className="text-2xl font-semibold text-slate-900 dark:text-white">Support us! ❤</span>
+        <p className="text-slate-700 dark:text-white dark:text-opacity-70">
           Flandria does
           {' '}
           <b>not</b>

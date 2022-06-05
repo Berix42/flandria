@@ -145,13 +145,13 @@ const ItemsOverview = () => {
               header={(
                 <CardHeader>
                   <CardHeaderTitle>{section.name}</CardHeaderTitle>
-                  <p className="text-sm leading-none text-gray-400 dark:text-white dark:text-opacity-70">
+                  <p className="text-sm leading-none text-slate-400 dark:text-white dark:text-opacity-70">
                     {section.subtext}
                   </p>
                 </CardHeader>
             )}
             >
-              <div className="divide-y divide-gray-200 dark:divide-dark-4">
+              <div className="divide-y divide-slate-200 dark:divide-dark-4">
                 {section.urls.map((url) => (
                   <ClickableCardItem
                     key={url[1]}

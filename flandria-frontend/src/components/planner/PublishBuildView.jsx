@@ -57,7 +57,7 @@ const PublishBuildView = () => {
   return (
     <div className="flex flex-col items-center justify-center w-full">
       <div className="w-full max-w-2xl px-8 py-4 space-y-5 bg-white border-l-4 border-blue-400 rounded-md shadow-xl dark:bg-dark-3">
-        <h2 className="w-full text-3xl font-bold tracking-wide text-center text-gray-900 uppercase dark:text-white mb-7">Publish a Skill-Build</h2>
+        <h2 className="w-full text-3xl font-bold tracking-wide text-center text-slate-900 uppercase dark:text-white mb-7">Publish a Skill-Build</h2>
         <div className={formContainerClassname}>
           <label className="text-input-label" htmlFor="title">
             Title * (
@@ -90,7 +90,7 @@ const PublishBuildView = () => {
           />
         </div>
 
-        <p className="text-gray-500 dark:text-white dark:text-opacity-75">
+        <p className="text-slate-500 dark:text-white dark:text-opacity-75">
           Publish build for
           {' '}
           <a

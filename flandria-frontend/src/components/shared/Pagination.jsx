@@ -4,7 +4,7 @@ const PageButton = ({
   children, isCurrent, disabled = false, onClick,
 }) => (
   <button
-    className={`${isCurrent ? 'text-gray-900 dark:text-dark-primary' : ''} ${disabled ? 'cursor-not-allowed' : 'cursor-pointer'} flex items-center text-lg justify-center border-2 dark:text-white border-gray-200 dark:border-dark-4 rounded-lg text-gray-500 font-semibold tabular-nums w-10 h-10 hover:bg-gray-200 dark:hover:bg-dark-3 hover:text-gray-700`}
+    className={`${isCurrent ? 'text-slate-900 dark:text-dark-primary' : ''} ${disabled ? 'cursor-not-allowed' : 'cursor-pointer'} flex items-center text-lg justify-center border-2 dark:text-white border-slate-200 dark:border-dark-4 rounded-lg text-slate-500 font-semibold tabular-nums w-10 h-10 hover:bg-slate-200 dark:hover:bg-dark-3 hover:text-slate-700`}
     type="button"
     onClick={onClick}
     disabled={disabled}

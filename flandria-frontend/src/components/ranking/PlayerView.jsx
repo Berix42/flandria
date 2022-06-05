@@ -87,7 +87,7 @@ const PlayerView = () => {
 
   return (
     <>
-      <div className="flex items-end justify-between pb-3 border-b border-gray-200 dark:border-dark-3">
+      <div className="flex items-end justify-between pb-3 border-b border-slate-200 dark:border-dark-3">
         <div>
           <Breadcrumbs
             items={[
@@ -104,7 +104,7 @@ const PlayerView = () => {
                 getImagePath(`class_icons/male_${characterClassToIconName[data.character_class.value]}.png`),
               ]}
             />
-            <h2 className="ml-1.5 mt-0 text-2xl font-semibold text-gray-700 md:text-3xl dark:text-white">
+            <h2 className="ml-1.5 mt-0 text-2xl font-semibold text-slate-700 md:text-3xl dark:text-white">
               <span>{data.name}</span>
             </h2>
           </div>

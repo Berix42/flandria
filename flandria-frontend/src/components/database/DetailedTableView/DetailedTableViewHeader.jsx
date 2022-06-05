@@ -21,7 +21,7 @@ const DetailedTableViewHeader = ({ tablename, item }) => {
   }
 
   return (
-    <div className="flex flex-col pb-3 border-b border-gray-200 dark:border-dark-3">
+    <div className="flex flex-col pb-3 border-b border-slate-200 dark:border-dark-3">
       <div>
         <Breadcrumbs
           items={[
@@ -37,7 +37,7 @@ const DetailedTableViewHeader = ({ tablename, item }) => {
             rareGrade={rareGrade}
             className="w-10 h-10 mr-1.5 box-content border-opacity-100"
           />
-          <h2 className="mt-0 text-2xl font-semibold text-gray-700 md:text-3xl dark:text-white">
+          <h2 className="mt-0 text-2xl font-semibold text-slate-700 md:text-3xl dark:text-white">
             {itemName}
           </h2>
         </div>
