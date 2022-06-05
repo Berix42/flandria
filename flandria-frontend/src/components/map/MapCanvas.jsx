@@ -1,5 +1,5 @@
 import React, { useEffect, useRef, useState } from 'react';
-import { useDebouncedCallback } from 'use-debounce/lib';
+import { useDebouncedCallback } from 'use-debounce';
 import { getImagePath } from '../../helpers';
 import Icon from '../shared/Icon';
 import ItemSubs from '../shared/ItemSubs';

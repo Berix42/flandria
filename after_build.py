@@ -28,25 +28,23 @@ shutil.copyfile(os.path.join(build_folder, "favicon.ico"),
                 os.path.join(static_folder, "favicon.ico"))
 
 # Copy assets
-shutil.rmtree(os.path.join(static_folder, "assets"), ignore_errors=True)
+shutil.rmtree(os.path.join(static_folder, "assets"))
 copy_tree(os.path.join(build_folder, "assets"),
           os.path.join(static_folder, "assets"))
 
 # Copy css
-shutil.rmtree(os.path.join(static_folder, "css"), ignore_errors=True)
+shutil.rmtree(os.path.join(static_folder, "css"))
 copy_tree(os.path.join(build_folder, "static", "css"),
           os.path.join(static_folder, "css"))
 
 # Create js folder in static
-shutil.rmtree(os.path.join(static_folder, "js"), ignore_errors=True)
+shutil.rmtree(os.path.join(static_folder, "js"))
 if not os.path.exists(os.path.join(static_folder, "js")):
     os.mkdir(os.path.join(static_folder, "js"))
 
-for fpath in manifest["entrypoints"]:
-    if not fpath.endswith("js"):
+for fname in os.listdir(os.path.join(build_folder, "static", "js")):
+    if not (fname.endswith("js") or fname.endswith("map")):
         continue
-
-    fname = fpath.rsplit("/", 1)[-1]
 
     # Copy normal js file
     shutil.copyfile(

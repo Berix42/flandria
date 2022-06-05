@@ -66,7 +66,7 @@ def js_file(filename: str):
             current_app.static_folder,
             "js",
         ),
-        filename=filename,
+        path=filename,
         mimetype="text/javascript")
 
     # Increase cache timeout (365 days)
