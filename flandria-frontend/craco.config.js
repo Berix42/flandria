@@ -1,10 +1,11 @@
 module.exports = {
   style: {
-    postcss: {
+    postcssOptions: {
       plugins: [
         require('tailwindcss'), //eslint-disable-line
         require('autoprefixer'), //eslint-disable-line
       ],
     },
   },
+  eslint: null,
 };
