@@ -1,15 +1,15 @@
 /* eslint-disable global-require */
 module.exports = {
-  purge: {
-    content: [
-      './src/**/*.js',
-      './src/**/*.jsx',
-      './public/*.html',
-    ],
-    options: {
-      safelist: [/col-span-/, /react-select__/],
+  content: [
+    './src/**/*.{js,jsx}',
+    './public/*.html',
+  ],
+  safelist: [
+    {
+      pattern: /col-span-/,
+      variants: ['sm', 'md', 'lg', 'xl', 'xl2'],
     },
-  },
+  ],
   darkMode: 'class',
   theme: {
     extend: {
@@ -80,14 +80,6 @@ module.exports = {
       animation: {
         scale: 'scale 0.2s linear forwards',
       },
-    },
-  },
-  variants: {
-    extend: {
-      typography: ['dark'],
-      animation: ['hover'],
-      backgroundImage: ['hover'],
-      textOpacity: ['dark'],
     },
   },
   plugins: [

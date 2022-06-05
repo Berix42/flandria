@@ -92,27 +92,25 @@ html.dark footer {
 }
 
 @layer utilities {
-  @variants hover {
-    .reset-filter {
-      -webkit-filter: none;
-      -moz-filter: none;
-      -o-filter: none;
-      -ms-filter: none;
-      filter: none;
-    }
+  .reset-filter {
+    -webkit-filter: none;
+    -moz-filter: none;
+    -o-filter: none;
+    -ms-filter: none;
+    filter: none;
+  }
 
-    .skill-disabled {
-      -webkit-filter: grayscale(100%);
-      -moz-filter: grayscale(100%);
-      -o-filter: grayscale(100%);
-      -ms-filter: grayscale(100%);
-      filter: grayscale(100%); 
-    }
-  
-    .skill-not-skilled {
-      filter: brightness(50%);
-      -webkit-filter: brightness(50%);
-      -moz-filter: brightness(50%);  
-    }
+  .skill-disabled {
+    -webkit-filter: grayscale(100%);
+    -moz-filter: grayscale(100%);
+    -o-filter: grayscale(100%);
+    -ms-filter: grayscale(100%);
+    filter: grayscale(100%);
+  }
+
+  .skill-not-skilled {
+    filter: brightness(50%);
+    -webkit-filter: brightness(50%);
+    -moz-filter: brightness(50%);
   }
 }

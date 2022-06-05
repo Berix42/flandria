@@ -158,7 +158,7 @@ const ItemSearchBar = ({ inputContainerClassName = '', resultContainerClassName 
           type="search"
           ref={inputRef}
           onFocus={() => setHasFocus(true)}
-          onChange={(e) => debouncedSearch.callback(e.target.value)}
+          onInput={(e) => debouncedSearch(e.target.value)}
           placeholder="Search..."
           className="flex-grow w-full min-w-0 bg-transparent outline-none dark:text-white"
         />
