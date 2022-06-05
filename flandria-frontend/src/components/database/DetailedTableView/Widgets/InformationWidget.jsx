@@ -345,15 +345,15 @@ const InformationWidget = ({ tablename, obj, className }) => {
         </CardHeader>
       )}
     >
-      <div className="divide-y divide-gray-200 dark:divide-dark-4">
+      <div className="divide-y divide-slate-200 dark:divide-dark-4">
         {informationItems.map((informationItem) => (
           <div key={informationItem.label} className="flex flex-col px-4 py-2">
-            <div className="flex flex-row justify-between text-gray-700 dark:text-white">
+            <div className="flex flex-row justify-between text-slate-700 dark:text-white">
               <span className="font-semibold">{informationItem.label}</span>
               <span>{informationItem.value}</span>
             </div>
             {informationItem.description && (
-            <small className="text-xs leading-none text-gray-400 dark:text-white dark:text-opacity-70">
+            <small className="text-xs leading-none text-slate-400 dark:text-white dark:text-opacity-70">
               {informationItem.description}
             </small>
             )}

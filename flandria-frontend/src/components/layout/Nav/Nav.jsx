@@ -8,7 +8,7 @@ import MobileMenuButton from './MobileMenuButton';
 
 const NavLink = ({ to, children }) => (
   <Link
-    className="text-lg font-semibold text-gray-500 hover:text-gray-900 dark:text-white dark:hover:text-dark-primary"
+    className="text-lg font-semibold text-slate-500 hover:text-slate-900 dark:text-white dark:hover:text-dark-primary"
     to={to}
   >
     {children}
@@ -18,8 +18,8 @@ const NavLink = ({ to, children }) => (
 const DropdownMenuLink = ({
   to, external, children, className = '',
 }) => {
-  const activeClassName = 'text-gray-900 bg-gray-100 dark:bg-dark-3';
-  const defaultClassName = `${className} text-gray-500 w-full text-sm leading-5 text-left flex justify-between px-4 py-2 dark:text-white`;
+  const activeClassName = 'text-slate-900 bg-slate-100 dark:bg-dark-3';
+  const defaultClassName = `${className} text-slate-500 w-full text-sm leading-5 text-left flex justify-between px-4 py-2 dark:text-white`;
 
   if (external) {
     return (
@@ -61,7 +61,7 @@ const DropdownMenu = ({
     <Menu>
       {({ open }) => (
         <>
-          <Menu.Button className="flex items-center text-lg font-semibold text-gray-500 hover:text-gray-900 dark:text-white dark:hover:text-dark-primary">
+          <Menu.Button className="flex items-center text-lg font-semibold text-slate-500 hover:text-slate-900 dark:text-white dark:hover:text-dark-primary">
             {button}
           </Menu.Button>
           <Transition
@@ -73,7 +73,7 @@ const DropdownMenu = ({
             leaveFrom="transform opacity-100 scale-100"
             leaveTo="transform opacity-0 scale-95"
           >
-            <Menu.Items static className={`absolute mt-2 bg-white border dark:bg-dark-2 dark:border-dark-3 border-gray-200 rounded-md shadow-md ${itemsClassName}`}>
+            <Menu.Items static className={`absolute mt-2 bg-white border dark:bg-dark-2 dark:border-dark-3 border-slate-200 rounded-md shadow-md ${itemsClassName}`}>
               {children}
             </Menu.Items>
           </Transition>
@@ -164,7 +164,7 @@ const Nav = () => {
       <DropdownMenu
         button={(
           <img
-            className="w-12 h-auto border-2 border-gray-200 rounded-full min-w-min min-h-min flex-shrink-1 dark:border-dark-3"
+            className="w-12 h-auto border-2 border-slate-200 rounded-full min-w-min min-h-min flex-shrink-1 dark:border-dark-3"
             src={getImagePath(isLoggedIn ? 'monster_icons/lm00202.png' : 'default_login_image.png')}
             alt="Profile Icon"
           />
@@ -174,7 +174,7 @@ const Nav = () => {
       >
         {isLoggedIn && (
         <div className="py-1">
-          <div className="flex justify-between w-full px-4 py-2 text-sm leading-5 text-left text-gray-500 dark:text-white">
+          <div className="flex justify-between w-full px-4 py-2 text-sm leading-5 text-left text-slate-500 dark:text-white">
             <span>
               Logged in as
               {' '}
@@ -185,13 +185,13 @@ const Nav = () => {
         )}
         <div className="py-1">
           <Switch.Group as="div" className="flex items-center justify-between px-4 py-2">
-            <Switch.Label className="text-sm text-gray-500 dark:text-white">Dark Mode</Switch.Label>
+            <Switch.Label className="text-sm text-slate-500 dark:text-white">Dark Mode</Switch.Label>
             <Switch
               as="button"
               checked={darkModeSwitchState}
               onChange={changeThemeMode}
               className={`${
-                darkModeSwitchState ? 'bg-blue-600 dark:bg-dark-3' : 'bg-gray-300'
+                darkModeSwitchState ? 'bg-blue-600 dark:bg-dark-3' : 'bg-slate-300'
               } relative inline-flex h-4 rounded-full w-8`}
             >
               <span

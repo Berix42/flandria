@@ -2,7 +2,7 @@ import React from 'react';
 
 const ErrorBoundaryView = ({ error }) => (
   <div className="flex justify-center py-20">
-    <div role="alert" className="prose text-gray-700 dark:text-white dark:prose-dark">
+    <div role="alert" className="prose text-slate-700 dark:text-white dark:prose-dark">
       <h1>Something went really really wrong, if you see this screen. (╯°□°）╯︵ ┻━┻</h1>
       <p>The following error occured in your last action:</p>
       <pre>

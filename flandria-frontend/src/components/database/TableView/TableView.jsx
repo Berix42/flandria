@@ -106,7 +106,7 @@ const TableView = () => {
   return (
     <>
       {isLoading && (<TopBarProgress />)}
-      <div className="flex flex-col pb-3 border-b border-gray-200 dark:border-dark-3">
+      <div className="flex flex-col pb-3 border-b border-slate-200 dark:border-dark-3">
         <div className="flex flex-row items-end justify-between">
           <div>
             <Breadcrumbs
@@ -115,12 +115,12 @@ const TableView = () => {
                 { text: tablenameToTitle(tablename), url: `/database/${tablename}` },
               ]}
             />
-            <h2 className="mt-2 text-2xl font-semibold text-gray-700 md:text-3xl dark:text-white">{tablenameToTitle(tablename)}</h2>
+            <h2 className="mt-2 text-2xl font-semibold text-slate-700 md:text-3xl dark:text-white">{tablenameToTitle(tablename)}</h2>
           </div>
           <button
             type="button"
             onClick={() => setFilterMenuOpen(!filterMenuOpen)}
-            className="flex items-center gap-2 px-2 py-1 font-bold text-center text-gray-700 uppercase bg-transparent rounded-lg md:text-lg md:px-6 md:py-2 focus:outline-none hover:bg-gray-200 dark:text-white dark:hover:bg-dark-3"
+            className="flex items-center gap-2 px-2 py-1 font-bold text-center text-slate-700 uppercase bg-transparent rounded-lg md:text-lg md:px-6 md:py-2 focus:outline-none hover:bg-slate-200 dark:text-white dark:hover:bg-dark-3"
           >
             Filter
             <svg className="h-6" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke="currentColor">

@@ -47,7 +47,7 @@ const SearchResultItem = ({ tableKey, item, onItemClick }) => {
     <Link
       to={toUrl}
       onClick={onItemClick}
-      className="flex items-center px-3 py-1 rounded-md group hover:bg-gray-200 dark:hover:bg-dark-3"
+      className="flex items-center px-3 py-1 rounded-md group hover:bg-slate-200 dark:hover:bg-dark-3"
     >
       <Icon
         icon={item.icon}
@@ -56,7 +56,7 @@ const SearchResultItem = ({ tableKey, item, onItemClick }) => {
         className="group-hover:border-opacity-100 w-8 h-8 mr-1.5 box-content"
       />
       <div className="flex flex-col">
-        <span className="text-sm font-semibold leading-none text-gray-700 group-hover:text-gray-900 dark:text-white dark:group-hover:text-white">
+        <span className="text-sm font-semibold leading-none text-slate-700 group-hover:text-slate-900 dark:text-white dark:group-hover:text-white">
           {item.name || item.title}
           <ItemDuration className="text-sm" duration={item.duration} />
         </span>
@@ -73,7 +73,7 @@ const SearchResultSection = ({ tableKey, items, onItemClick }) => {
 
   return (
     <div className="py-2">
-      <span className="text-lg font-semibold tracking-wide text-gray-900 dark:text-white">
+      <span className="text-lg font-semibold tracking-wide text-slate-900 dark:text-white">
         {tablenameToTitle(tableKey)}
       </span>
       <div className="grid grid-cols-1 gap-0 xl:grid-cols-2 xl:gap-1 2xl:grid-cols-3">
@@ -142,14 +142,14 @@ const ItemSearchBar = ({ inputContainerClassName = '', resultContainerClassName 
 
   return (
     <div className={`relative z-50 ${inputContainerClassName}`}>
-      <div className="flex items-center px-2 py-1 border-2 border-gray-200 rounded-lg dark:border-dark-3">
+      <div className="flex items-center px-2 py-1 border-2 border-slate-200 rounded-lg dark:border-dark-3">
         <div className="mr-2">
           {isSearching ? (
-            <svg className="w-5 h-5 text-gray-400 dark:text-white animate-spin" viewBox="0 0 24 24">
+            <svg className="w-5 h-5 text-slate-400 dark:text-white animate-spin" viewBox="0 0 24 24">
               <path className="opacity-75" fill="currentColor" d="M4 12a8 8 0 018-8V0C5.373 0 0 5.373 0 12h4zm2 5.291A7.962 7.962 0 014 12H0c0 3.042 1.135 5.824 3 7.938l3-2.647z" />
             </svg>
           ) : (
-            <svg className="w-5 h-5 text-gray-400 dark:text-white" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+            <svg className="w-5 h-5 text-slate-400 dark:text-white" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke="currentColor">
               <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M21 21l-6-6m2-5a7 7 0 11-14 0 7 7 0 0114 0z" />
             </svg>
           )}
@@ -174,7 +174,7 @@ const ItemSearchBar = ({ inputContainerClassName = '', resultContainerClassName 
       >
         <div
           className={
-            `absolute bg-white w-full mt-2 px-3 rounded-lg shadow-md max-h-96 overflow-y-auto divide-y dark:divide-dark-3 border-gray-200 border dark:border-dark-3 dark:bg-dark-2
+            `absolute bg-white w-full mt-2 px-3 rounded-lg shadow-md max-h-96 overflow-y-auto divide-y dark:divide-dark-3 border-slate-200 border dark:border-dark-3 dark:bg-dark-2
             ${resultContainerClassName}`
           }
           ref={resultsRef}

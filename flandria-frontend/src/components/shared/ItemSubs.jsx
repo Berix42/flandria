@@ -67,7 +67,7 @@ const ItemSubs = ({ tablename, item, additionalSubs = [] }) => {
   return (
     <div className="flex flex-row flex-wrap">
       {subs.map((sub, index) => (
-        <span key={sub} className="text-sm leading-4 text-gray-500 dark:text-white dark:text-opacity-70">
+        <span key={sub} className="text-sm leading-4 text-slate-500 dark:text-white dark:text-opacity-70">
           {sub}
           {((index + 1) < subs.length) && (<span className="px-1">•</span>)}
         </span>

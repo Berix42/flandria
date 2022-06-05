@@ -148,7 +148,7 @@ const Skill = ({
           <div className="flex flex-col gap-3 divide-y divide-white">
             <div className="flex justify-between">
               <div className="flex-col gap-2">
-                <h2 className="text-base text-green-500">{skillObj.baseSkill.name}</h2>
+                <h2 className="text-base text-emerald-500">{skillObj.baseSkill.name}</h2>
                 <p className="text-xs leading-none text-white opacity-70">
                   {((classname === 'ship')
                     ? resolveSeaClassNames(skillObj.baseSkill.class_sea)
@@ -158,7 +158,7 @@ const Skill = ({
                   {resolveWeaponTypeToName(skillObj.baseSkill.required_weapons)}
                 </p>
               </div>
-              <span className="text-base text-yellow-600">
+              <span className="text-base text-amber-600">
                 {skillObj.skillLevel}
                 /
                 {skillObj.baseSkill.max_level}

@@ -36,7 +36,7 @@ const TableViewItem = ({ tablename, item, showIcon = true }) => {
   return (
     <Link
       to={link}
-      className="flex flex-row items-center px-4 py-2 rounded-md cursor-pointer dark:from-dark-3 hover:bg-gradient-to-r from-gray-200 to-transparent hover:animate-scale group"
+      className="flex flex-row items-center px-4 py-2 rounded-md cursor-pointer dark:from-dark-3 hover:bg-gradient-to-r from-slate-200 to-transparent hover:animate-scale group"
     >
       {showIcon && (
       <Icon
@@ -47,7 +47,7 @@ const TableViewItem = ({ tablename, item, showIcon = true }) => {
       />
       )}
       <div className="flex flex-col justify-center">
-        <h3 className="font-semibold leading-none text-gray-700 dark:text-white">
+        <h3 className="font-semibold leading-none text-slate-700 dark:text-white">
           {itemName}
           <ItemDuration duration={item.duration} />
         </h3>
