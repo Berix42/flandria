@@ -66,9 +66,7 @@ const MobileSideMenu = ({ closeMenu, isLoggedIn }) => (
       <MobileMenuSection header="Account">
         {isLoggedIn
           ? (
-            <>
-              <MobileMenuLink to="/auth/logout">Logout</MobileMenuLink>
-            </>
+            <MobileMenuLink to="/auth/logout">Logout</MobileMenuLink>
           )
           : (
             <>
