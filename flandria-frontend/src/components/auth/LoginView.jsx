@@ -1,12 +1,12 @@
 import Axios from 'axios';
 import React, { useEffect, useState } from 'react';
-import { useHistory } from 'react-router-dom';
+import { useNavigate } from 'react-router-dom';
 import { getApiUrl, setWindowTitle } from '../../helpers';
 import { loginUser } from './auth';
 import AuthWrapper from './AuthWrapper';
 
 const LoginView = () => {
-  const history = useHistory();
+  const navigate = useNavigate();
 
   const [username, setUsername] = useState('');
   const [password, setPassword] = useState('');
@@ -40,7 +40,7 @@ const LoginView = () => {
         username, password,
       });
       loginUser(resp.data.access_token);
-      history.push('/');
+      navigate('/', { replace: true });
     } catch (error) {
       const errorMessage = error.response.data.message;
       setFieldErrors([errorMessage]);

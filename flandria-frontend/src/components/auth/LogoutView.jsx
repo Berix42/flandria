@@ -1,13 +1,13 @@
 import { useEffect } from 'react';
-import { useHistory } from 'react-router-dom';
+import { useNavigate } from 'react-router-dom';
 import { logoutUser } from './auth';
 
 const LogoutView = () => {
-  const history = useHistory();
+  const navigate = useNavigate();
 
   useEffect(() => {
     logoutUser();
-    history.push('/');
+    navigate('/');
   }, []);
 
   return null;
