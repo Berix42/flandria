@@ -1,0 +1,4 @@
+webapp/static
+webapp/templates
+flandria-frontend/build
+flandria-frontend/node_modules
