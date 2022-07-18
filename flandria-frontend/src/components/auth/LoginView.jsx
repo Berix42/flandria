@@ -1,12 +1,13 @@
 import Axios from 'axios';
 import React, { useEffect, useState } from 'react';
-import { useNavigate } from 'react-router-dom';
+import { useLocation, useNavigate } from 'react-router-dom';
 import { getApiUrl, setWindowTitle } from '../../helpers';
 import { loginUser } from './auth';
 import AuthWrapper from './AuthWrapper';
 
 const LoginView = () => {
   const navigate = useNavigate();
+  const location = useLocation();
 
   const [username, setUsername] = useState('');
   const [password, setPassword] = useState('');
@@ -40,7 +41,8 @@ const LoginView = () => {
         username, password,
       });
       loginUser(resp.data.access_token);
-      navigate('/', { replace: true });
+      // Redirect back to origin page with state
+      navigate(location.state?.from ?? '/', { replace: true, state: location.state });
     } catch (error) {
       const errorMessage = error.response.data.message;
       setFieldErrors([errorMessage]);
