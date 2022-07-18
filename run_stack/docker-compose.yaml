@@ -18,6 +18,7 @@ services:
       - "5000"
     environment:
       - APP_ENV=${APP_ENV:-prod}
+      - VIRTUAL_HOST=${SITE_NAME:-localhost}
     volumes:
       - type: bind
         source: ../database.db
@@ -25,19 +26,21 @@ services:
         read_only: false
     depends_on:
       - migration
+      - nginx
+    restart: always
   nginx:
     container_name: flandria_nginx
-    build:
-      context: nginx
-      dockerfile: Dockerfile-nginx
-    environment:
-      - APP_ENV=${APP_ENV:-prod}
-      - SITE_NAME=${SITE_NAME:-you.forgot.to.set.the.sitename.info}
+    image: nginxproxy/nginx-proxy
     volumes:
       - type: bind
-        source: nginx/ssl_certs
-        target: /etc/nginx/ssl/flandria
+        source: ./ssl_certs
+        target: /etc/nginx/certs
+        read_only: true
+      - type: bind
+        source: /var/run/docker.sock
+        target: /tmp/docker.sock
         read_only: true
     ports:
       - "80:80"
       - "443:443"
+    restart: always

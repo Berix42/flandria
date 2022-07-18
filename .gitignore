@@ -12,3 +12,4 @@ ranking.json
 flandria-frontend/.eslintcache
 webapp/static
 webapp/templates
+ssl_certs
