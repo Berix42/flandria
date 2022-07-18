@@ -77,7 +77,6 @@ const BuildsView = (props) => {
       // Update data to reflect the new changes
       const buildsWithoutChangedOne = [...data.filter((b) => b.id !== buildId)];
       const changedBuild = data.filter((b) => b.id === buildId)[0];
-      console.log(buildsWithoutChangedOne, changedBuild);
       const userId = getIdentity().id;
 
       if (userHasLiked) {
