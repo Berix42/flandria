@@ -1,7 +1,7 @@
 /* eslint-disable no-unused-vars */
 import Axios from 'axios';
 import React, { useEffect, useState } from 'react';
-import { useHistory, useLocation } from 'react-router-dom';
+import { useNavigate, useLocation } from 'react-router-dom';
 import Select from 'react-select';
 import TopBarProgress from 'react-topbar-progress-indicator';
 import { getApiUrl, setWindowTitle } from '../../helpers';
@@ -28,7 +28,7 @@ const serverSelectOptions = [
 ];
 
 const GuildOverview = () => {
-  const history = useHistory();
+  const navigate = useNavigate();
   const location = useLocation();
   const throwError = useAsyncError();
 
@@ -85,11 +85,7 @@ const GuildOverview = () => {
       search: `?${params.toString()}`,
     };
 
-    if (!location.search) {
-      history.replace(args);
-    } else {
-      history.push(args);
-    }
+    navigate(args, { replace: !location.search });
   }, [currentPage]);
 
   useDidMountEffect(() => {

@@ -1,6 +1,6 @@
 import React from 'react';
 import {
-  BrowserRouter as Router, Route, Switch,
+  BrowserRouter as Router, Route, Routes,
 } from 'react-router-dom';
 import TopBarProgress from 'react-topbar-progress-indicator';
 import { ErrorBoundary } from 'react-error-boundary';
@@ -45,34 +45,34 @@ const App = () => (
       <GATracker trackingId="UA-216355284-1">
         <CookiesProvider>
           <Layout>
-            <Switch>
-              <Route path="/" exact component={LandingPage} />
-              <Route path="/about" exact component={About} />
-              <Route path="/privacy-policy" exact component={PrivacyPolicy} />
-              <Route path="/legal-notice" exact component={LegalNotice} />
+            <Routes>
+              <Route path="/" exact element={<LandingPage />} />
+              <Route path="/about" exact element={<About />} />
+              <Route path="/privacy-policy" exact element={<PrivacyPolicy />} />
+              <Route path="/legal-notice" exact element={<LegalNotice />} />
 
-              <Route path="/auth/login" exact component={LoginView} />
-              <Route path="/auth/register" exact component={RegisterView} />
-              <Route path="/auth/logout" exact component={LogoutView} />
+              <Route path="/auth/login" exact element={<LoginView />} />
+              <Route path="/auth/register" exact element={<RegisterView />} />
+              <Route path="/auth/logout" exact element={<LogoutView />} />
 
-              <Route path="/database" exact component={ItemsOverview} />
-              <Route path="/database/:tablename" exact component={TableView} />
-              <Route path="/database/:tablename/:code" exact component={DetailedTableView} />
+              <Route path="/database" exact element={<ItemsOverview />} />
+              <Route path="/database/:tablename" exact element={<TableView />} />
+              <Route path="/database/:tablename/:code" exact element={<DetailedTableView />} />
 
-              <Route path="/map" exact component={MapsOverview} />
-              <Route path="/map/:mapCode" exact component={MapView} />
+              <Route path="/map" exact element={<MapsOverview />} />
+              <Route path="/map/:mapCode" exact element={<MapView />} />
 
-              <Route path="/planner/:classname" exact component={PlannerView} />
-              <Route path="/planner/:classname/builds" exact component={BuildsView} />
-              <Route path="/planner/builds/add" exact component={PublishBuildView} />
+              <Route path="/planner/:classname" exact element={<PlannerView />} />
+              <Route path="/planner/:classname/builds" exact element={<BuildsView />} />
+              <Route path="/planner/builds/add" exact element={<PublishBuildView />} />
 
-              <Route path="/ranking/statistics" exact component={RankingStatistics} />
-              <Route path="/ranking/guilds" exact component={GuildOverview} />
-              <Route path="/ranking/guilds/:guildName+" component={GuildView} />
-              <Route path="/ranking/players/:server/:name" exact component={PlayerView} />
+              <Route path="/ranking/statistics" exact element={<RankingStatistics />} />
+              <Route path="/ranking/guilds" exact element={<GuildOverview />} />
+              <Route path="/ranking/guilds/:guildName+" exact element={<GuildView />} />
+              <Route path="/ranking/players/:server/:name" exact element={<PlayerView />} />
 
-              <Route component={Error404Page} />
-            </Switch>
+              <Route path="*" element={<Error404Page />} />
+            </Routes>
           </Layout>
         </CookiesProvider>
       </GATracker>
