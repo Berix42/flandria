@@ -1,11 +1,12 @@
 import Axios from 'axios';
 import React, { useEffect, useState } from 'react';
-import { useNavigate } from 'react-router-dom';
+import { useLocation, useNavigate } from 'react-router-dom';
 import { getApiUrl, setWindowTitle } from '../../helpers';
 import AuthWrapper from './AuthWrapper';
 
 const RegisterView = () => {
   const navigate = useNavigate();
+  const location = useLocation();
 
   const [username, setUsername] = useState('');
   const [password, setPassword] = useState('');
@@ -45,7 +46,7 @@ const RegisterView = () => {
       await Axios.post(`${getApiUrl()}/auth/register`, {
         username, password,
       });
-      navigate('/auth/login', { replace: true });
+      navigate(location.state?.from ?? '/auth/login', { replace: true, state: location.state });
     } catch (error) {
       const errorMessage = error.response.data.message;
       setFieldErrors([errorMessage]);
