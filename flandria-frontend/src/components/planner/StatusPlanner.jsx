@@ -141,7 +141,6 @@ const StatusPlanner = ({ classname, statusData, hash }) => {
   };
 
   const setInitialValues = () => {
-    console.log(classname);
     const initialPoints = CLASSNAME_TO_INITIAL_POINTS[classname];
     const hashValues = hash.getStatusPoints();
 
