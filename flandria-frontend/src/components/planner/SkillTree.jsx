@@ -10,7 +10,6 @@ import Card, { CardHeader } from '../shared/Card';
 import { getImagePath } from '../../helpers';
 import SkillObject from './SkillObject';
 import Skill from './Skill';
-import { isAuthenticated } from '../auth/auth';
 
 const classSelectOptions = {
   explorer: [
@@ -457,7 +456,7 @@ class SkillTree extends React.Component {
                 <HiDownload className="w-4 h-4" />
                 Image
               </button>
-              {(isAuthenticated() && classname !== 'ship') && (
+              {(classname !== 'ship') && (
                 <Link
                   to={{
                     pathname: '/planner/builds/add',
