@@ -1,6 +1,6 @@
 import Axios from 'axios';
 import React, { useEffect, useState } from 'react';
-import { useLocation, useNavigate } from 'react-router-dom';
+import { Link, useLocation, useNavigate } from 'react-router-dom';
 import { getApiUrl, setWindowTitle } from '../../helpers';
 import { loginUser } from './auth';
 import AuthWrapper from './AuthWrapper';
@@ -72,6 +72,17 @@ const LoginView = () => {
         <div className="flex flex-col h-12 gap-2 overflow-auto text-red-400 dark:text-red-600 max-h-12">
           {fieldErrors.map((error) => <span key={error}>{error}</span>)}
         </div>
+        <p className="flex justify-center whitespace-pre-wrap text-sm text-slate-900 dark:text-white">
+          Do not have an account yet? Sign up
+          {' '}
+          <Link
+            to="/auth/register"
+            state={location.state}
+            className="text-blue-500 dark:text-blue-600"
+          >
+            here
+          </Link>
+        </p>
         <div className="flex justify-center">
           <button type="submit" className="px-16 py-2 text-xl font-semibold tracking-wider text-white uppercase bg-emerald-400 rounded-full outline-none dark:bg-emerald-600 focus-within:outline-none hover:bg-emerald-500 dark:hover:bg-emerald-500">
             Sign In
