@@ -30,7 +30,7 @@ if not os.path.exists(static_folder):
 shutil.copyfile(os.path.join(build_folder, "index.html"), os.path.join(templates_folder, "index.html"))
 shutil.copyfile(os.path.join(build_folder, "favicon.ico"), os.path.join(static_folder, "favicon.ico"))
 clean_than_copy_path(os.path.join(build_folder, "assets"), os.path.join(static_folder, "assets"))
-clean_than_copy_path(os.path.join(build_folder, "files"), os.path.join(static_folder, "files"))
+clean_than_copy_path(os.path.join(build_folder, "static", "files"), os.path.join(static_folder, "files"))
 clean_than_copy_path(os.path.join(build_folder, "static", "css"), os.path.join(static_folder, "css"))
 
 shutil.rmtree(os.path.join(static_folder, "js"), ignore_errors=True)
