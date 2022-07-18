@@ -2,9 +2,7 @@ version: "3.9"
 services:
   migration:
     container_name: flandria_db_migration
-    build:
-      context: ..
-      dockerfile: run_stack/Dockerfile
+    image: ghcr.io/lauderandtaiga/flandria/flandria-backend
     command: flask db upgrade head
     environment:
       - APP_ENV=${APP_ENV:-prod}
@@ -15,9 +13,7 @@ services:
         read_only: false
   flandria:
     container_name: flandria_server
-    build:
-      context: ..
-      dockerfile: run_stack/Dockerfile
+    image: ghcr.io/lauderandtaiga/flandria/flandria-backend
     expose:
       - "5000"
     environment:
