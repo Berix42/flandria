@@ -25,22 +25,33 @@ run_stack         | Deployment files (docker + config-files)
 webapp            | Backend files (application logic)
 
 
-Install all requirements.
-```commandline
-pip install -r requirements.txt
-```
-
 Contribute to the project
 --------------------------------
 Clone repository:
 ```
 git clone https://github.com/lauderandtaiga/flandria.git
-cd flandria
 ```
-Run flask-server:
+Install requirements for backend (python installation required, might want to look at _virtual environments_ beforehand):
 ```commandline
+cd flandria
+pip install -r requirements.txt
+```
+Install requirements for frontend (nodejs installation required):
+```commandline
+cd flandria-frontend
+npm install
+```
+Run backend for development:
+```commandline
+cd flandria
 FLASK_ENV=development FLASK_APP=app.py flask run --host=0.0.0.0 --port 5000
 ```
+Run frontend with hot-reload feature:
+```commandline
+cd flandria-frontend
+PORT=80 npm run start
+```
+With running backend and running frontend check [localhost](http://localhost), you should now see the website.
 
 Initialize database
 --------------------------------
@@ -118,8 +129,6 @@ Open a browser and check if you can reach the server. Additional firewall-settin
 Gets new images from [DockerHub](https://hub.docker.com/r/florensiacommunity/flandria), restarts only containers with
 changed image and cleans up unneeded image-space afterwards:
 ```commandline
-cd flandria/run_stack
-git pull
 docker compose pull
 APP_ENV=prod SITE_NAME=flandria.wiki docker compose up -d
 docker image prune
