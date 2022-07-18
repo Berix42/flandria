@@ -1,6 +1,6 @@
 import Axios from 'axios';
 import React, { useEffect, useState } from 'react';
-import { Link } from 'react-router-dom';
+import { Link, useParams } from 'react-router-dom';
 import TopBarProgress from 'react-topbar-progress-indicator';
 import { AiFillStar, AiOutlineStar } from 'react-icons/ai';
 import { HiTrash } from 'react-icons/hi';
@@ -13,14 +13,14 @@ import { isAuthenticated, getIdentity, getToken } from '../auth/auth';
 import IconGroup from '../shared/IconGroup';
 import { characterClassToIconName } from '../../constants';
 
-const BuildsView = (props) => {
-  const { match } = props;
+const BuildsView = () => {
+  const { classname } = useParams();
   const [isLoading, setIsLoading] = useState(true);
   const [data, setData] = useState(null);
   const throwError = useAsyncError();
 
   const fetchData = async () => {
-    const url = `${getApiUrl()}/planner/${match.params.classname}/builds`;
+    const url = `${getApiUrl()}/planner/${classname}/builds`;
 
     try {
       const result = await Axios(url);
@@ -32,7 +32,7 @@ const BuildsView = (props) => {
   };
 
   useEffect(() => {
-    setWindowTitle(`Builds ${tablenameToTitle(match.params.classname)}`);
+    setWindowTitle(`Builds ${tablenameToTitle(classname)}`);
 
     setIsLoading(true);
     fetchData();
@@ -102,14 +102,14 @@ const BuildsView = (props) => {
             <Breadcrumbs
               items={[
                 { text: 'Planner', url: '/' },
-                { text: tablenameToTitle(match.params.classname), url: `/planner/${match.params.classname}` },
-                { text: 'Builds', url: `/planner/${match.params.classname}/builds` },
+                { text: tablenameToTitle(classname), url: `/planner/${classname}` },
+                { text: 'Builds', url: `/planner/${classname}/builds` },
               ]}
             />
             <h2 className="mt-2 text-2xl font-semibold text-slate-700 md:text-3xl dark:text-white">
               Builds
               {' '}
-              {tablenameToTitle(match.params.classname)}
+              {tablenameToTitle(classname)}
             </h2>
           </div>
         </div>
@@ -117,7 +117,7 @@ const BuildsView = (props) => {
       {(data && data.length > 0 && !isLoading) && (
       <div className="grid grid-cols-1 gap-6 py-3 md:grid-cols-2 lg:grid-cols-3">
           {data.sort((a, b) => b.stars.length > a.stars.length).map((build) => {
-            const link = `/planner/${match.params.classname}#${build.build_hash}`;
+            const link = `/planner/${classname}#${build.build_hash}`;
             let userHasLiked = false;
             let userId = -1;
 

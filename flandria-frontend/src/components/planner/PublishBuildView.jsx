@@ -2,7 +2,7 @@
 /* eslint-disable camelcase */
 import React, { useEffect, useState } from 'react';
 import { HiCursorClick } from 'react-icons/hi';
-import { useHistory, useLocation } from 'react-router-dom';
+import { useNavigate, useLocation } from 'react-router-dom';
 import Axios from 'axios';
 import { getApiUrl, setWindowTitle } from '../../helpers';
 import { getToken } from '../auth/auth';
@@ -11,14 +11,14 @@ const formContainerClassname = 'flex flex-col flex-grow space-y-2';
 
 const PublishBuildView = () => {
   const location = useLocation();
-  const history = useHistory();
+  const navigate = useNavigate();
 
   useEffect(() => {
     setWindowTitle('Publish a build');
   }, []);
 
   if (!location.state) {
-    history.push('/');
+    navigate('/', { replace: true });
     return null;
   }
 
@@ -45,7 +45,7 @@ const PublishBuildView = () => {
       }, {
         headers: { Authorization: `Bearer ${getToken()}` },
       });
-      history.push(`/planner/${url_classname}/builds`);
+      navigate(`/planner/${url_classname}/builds`, { replace: true });
     } catch (error) {
       const errorMessage = error.response.data.message;
       setFieldErrors([errorMessage]);

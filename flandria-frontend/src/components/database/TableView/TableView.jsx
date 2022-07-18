@@ -1,6 +1,6 @@
 import { Transition } from '@headlessui/react';
 import React, { useEffect, useState } from 'react';
-import { useHistory, useLocation, useParams } from 'react-router-dom';
+import { useNavigate, useLocation, useParams } from 'react-router-dom';
 import Axios from 'axios';
 import TopBarProgress from 'react-topbar-progress-indicator';
 import Breadcrumbs from '../../shared/Breadcrumbs';
@@ -40,7 +40,7 @@ function getDefaultFilter(tablename, search) {
 
 const TableView = () => {
   const { tablename } = useParams();
-  const history = useHistory();
+  const navigate = useNavigate();
   const location = useLocation();
   const throwError = useAsyncError();
 
@@ -91,16 +91,9 @@ const TableView = () => {
     const args = {
       pathname: location.pathname,
       search: `?${params.toString()}`,
-      state: {
-        filtersChanged: true,
-      },
     };
 
-    if (!location.search) {
-      history.replace(args);
-    } else {
-      history.push(args);
-    }
+    navigate(args, { replace: !location.search, state: { filtersChanged: true } });
   }, [filter]);
 
   return (
