@@ -130,6 +130,8 @@ const Nav = () => {
             <DropdownMenuLink to="/planner/noble">Noble</DropdownMenuLink>
             <DropdownMenuLink to="/planner/saint">Saint</DropdownMenuLink>
             <DropdownMenuLink to="/planner/mercenary">Mercenary</DropdownMenuLink>
+          </div>
+          <div className="py-1">
             <DropdownMenuLink to="/planner/ship">Ship</DropdownMenuLink>
           </div>
         </DropdownMenu>
