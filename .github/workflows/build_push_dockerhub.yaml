@@ -25,8 +25,8 @@ jobs:
         uses: docker/build-push-action@v3
         with:
           context: .
-          file: ./run_stack/Dockerfile
+          file: ./run_stack/Dockerfile-backend
           push: true
-          tags: ${{ secrets.DOCKERHUB_USERNAME }}/flandria:latest
+          tags: ${{ secrets.DOCKERHUB_USERNAME }}/flandria-backend:latest
           cache-from: type=gha
           cache-to: type=gha,mode=max
