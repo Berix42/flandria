@@ -2,7 +2,7 @@ version: "3.9"
 services:
   migration:
     container_name: flandria_db_migration
-    image: florensiacommunity/flandria
+    image: florensiacommunity/flandria-backend
     command: flask db upgrade head
     environment:
       - APP_ENV=${APP_ENV:-prod}
@@ -11,9 +11,9 @@ services:
         source: ../database.db
         target: /home/flandria_user/flandria/database.db
         read_only: false
-  flandria:
-    container_name: flandria_server
-    image: florensiacommunity/flandria
+  backend:
+    container_name: flandria_backend
+    image: florensiacommunity/flandria-backend
     expose:
       - "5000"
     environment:
