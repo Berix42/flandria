@@ -1,0 +1,26 @@
+FROM node:bullseye AS build
+
+# Disable interactive mode = disable dialogs from apt while installing (e.g. to install npm)
+ENV DEBIAN_FRONTEND noninteractive
+# Install python and add aliases for python-command, so they are available to the following scripts (especially "after_build.py")
+RUN apt-get -y update  \
+    && apt-get -y install python3.9 python3-pip \
+    && ln -s $(which python3.9) /usr/bin/python && ln -s $(which python3.9) /usr/bin/py
+
+# Add new user for flandria-server
+RUN useradd -ms /bin/bash flandria_user && chown flandria_user /home/flandria_user
+
+# Install frontend dependencies
+WORKDIR /home/flandria_user/flandria/flandria-frontend
+ADD --chown=flandria_user flandria-frontend/package.json .
+ADD --chown=flandria_user flandria-frontend/package-lock.json .
+RUN npm install
+
+# Build frontend
+COPY --chown=flandria_user after_build.py ..
+ADD --chown=flandria_user webapp ../webapp
+ADD --chown=flandria_user flandria-frontend .
+# The build-directive in "flandria-frontend/package.json" copies the files after building to the webapp-dirs
+RUN npm run build
+
+# Multi-stage build (copy needed files from previouse stage to decrease number of layers and size of resulting image)
