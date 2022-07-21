@@ -1,18 +1,32 @@
-FROM python:3.9-slim-bullseye
+FROM python:3.9-slim-bullseye AS build
 
-# Add new user for flandria-server
-RUN useradd -ms /bin/bash flandria_user && chown flandria_user /home/flandria_user
 WORKDIR /home/flandria_user/flandria
+
+# Setup virtual environment
+RUN python -m venv venv
+ENV PATH="/home/flandria_user/flandria/venv/bin:$PATH"
 
 # Install requirements
 COPY requirements.txt .
 RUN pip install -r requirements.txt
 
-# Copy only needed files from build-stage or local repository
-COPY --from=build --chown=flandria_user /home/flandria_user/flandria/webapp webapp
-COPY --chown=flandria_user app.py run_stack/wsgi.py ./
-ADD --chown=flandria_user database_updater database_updater
-ADD --chown=flandria_user migrations migrations
+# Copy only needed files from local repository
+COPY app.py run_stack/wsgi.py ./
+COPY migrations migrations
+COPY database_updater database_updater
+COPY webapp webapp
+
+FROM python:3.9-alpine
+
+# Add new user for flandria-server
+RUN adduser flandria_user --disabled-password --home /home/flandria_user
+WORKDIR /home/flandria_user/flandria
+
+# Copy only needed files from build-stage (including venv as a subfolder)
+COPY --from=build --chown=flandria_user /home/flandria_user/flandria .
+
+# Active virtual environment
+ENV PATH="/home/flandria_user/flandria/venv/bin:$PATH"
 
 # Start webserver
 # Replace Flask internal server with Gunicorn (application server) for productional usage
