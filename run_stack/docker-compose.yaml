@@ -11,8 +11,8 @@ services:
         source: ../database.db
         target: /home/flandria_user/flandria/database.db
         read_only: false
-  flandria:
-    container_name: flandria_server
+  backend:
+    container_name: flandria_backend
     image: ghcr.io/lauderandtaiga/flandria/flandria-backend
     expose:
       - "5000"
