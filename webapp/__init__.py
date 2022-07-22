@@ -10,7 +10,6 @@ from webapp.api.ranking import (GuildDetailedView, GuildOverviewView,
                                 PlayerOverviewView)
 from webapp.config import DevelopmentConfig, ProductionConfig, TestingConfig
 from webapp.extensions import api_, cache, db, jwt, migrate
-from webapp.main import main_bp
 from webapp.tasks import tasks_cli
 from webapp.utils import gzip_response, set_cors_header  # noqa: F401
 from webapp.loaders import user_lookup_loader
@@ -43,9 +42,6 @@ def create_app() -> Flask:
     # Extensions
     register_extensions(app)
 
-    # Register blueprints
-    register_blueprints(app)
-
     # Register api endpoints
     register_api_endpoints()
 
@@ -65,15 +61,6 @@ def create_app() -> Flask:
         cache.clear()
 
     return app
-
-
-def register_blueprints(app: Flask) -> None:
-    """Registers all blueprints to the given app object.
-
-    Args:
-        app (Flask): The flask application object.
-    """
-    app.register_blueprint(main_bp)
 
 
 def register_extensions(app: Flask) -> None:
