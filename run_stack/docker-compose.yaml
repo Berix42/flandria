@@ -11,6 +11,18 @@ services:
         source: ../database.db
         target: /home/flandria_user/flandria/database.db
         read_only: false
+  frontend:
+    container_name: flandria_frontend
+    image: ghcr.io/lauderandtaiga/flandria/flandria-frontend
+    expose:
+      - "80"
+    environment:
+      - APP_ENV=${APP_ENV:-prod}
+      - VIRTUAL_HOST=${SITE_NAME:-localhost}
+      - VIRTUAL_PATH=/
+    depends_on:
+      - backend
+    restart: always
   backend:
     container_name: flandria_backend
     image: ghcr.io/lauderandtaiga/flandria/flandria-backend
@@ -19,6 +31,7 @@ services:
     environment:
       - APP_ENV=${APP_ENV:-prod}
       - VIRTUAL_HOST=${SITE_NAME:-localhost}
+      - VIRTUAL_PATH=/api
     volumes:
       - type: bind
         source: ../database.db
