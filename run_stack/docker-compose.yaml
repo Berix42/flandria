@@ -31,7 +31,7 @@ services:
     environment:
       - APP_ENV=${APP_ENV:-prod}
       - VIRTUAL_HOST=${SITE_NAME:-localhost}
-      - VIRTUAL_PATH=/api
+      - VIRTUAL_PATH=~^/(api|swaggerui)
     volumes:
       - type: bind
         source: ../database.db

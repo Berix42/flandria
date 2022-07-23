@@ -6,7 +6,6 @@ from flask_caching import Cache
 
 db = SQLAlchemy()
 migrate = Migrate()
-api_ = Api(version="1.0", title="Flandria API", prefix="/api",
-           doc=False)
+api_ = Api(version="1.0", title="Flandria API", prefix="/api", doc="/api")
 jwt = JWTManager()
 cache = Cache()

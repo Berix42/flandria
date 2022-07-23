@@ -24,6 +24,7 @@ migrations        | Adjusting database scheme
 run_stack         | Deployment files (docker + config-files)
 webapp            | Backend files (application logic)
 
+Live Swagger-doc of endpoints can be found at _/api_.
 
 Contribute to the project
 --------------------------------

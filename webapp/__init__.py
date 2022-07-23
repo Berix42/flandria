@@ -90,19 +90,19 @@ def register_commands(app: Flask) -> None:
 def register_api_endpoints() -> None:
 
     # Database API
-    database_ns = api_.namespace("/database")
+    database_ns = api_.namespace("database")
     database_ns.add_resource(TableView, "/<table>")
     database_ns.add_resource(DetailedTableView, "/<table>/<code>")
     database_ns.add_resource(Search, "/search")
     database_ns.add_resource(MapView, "/map/<code>")
 
     # Auth API
-    auth_ns = api_.namespace("/auth")
+    auth_ns = api_.namespace("auth")
     auth_ns.add_resource(RegisterView, "/register")
     auth_ns.add_resource(LoginView, "/login")
 
     # Planner API
-    planner_ns = api_.namespace("/planner")
+    planner_ns = api_.namespace("planner")
     planner_ns.add_resource(PlannerView, "/<classname>")
     planner_ns.add_resource(PlannerBuildView,
                             "/<string:classname>/builds",
@@ -113,7 +113,7 @@ def register_api_endpoints() -> None:
                             "/builds/<int:build_id>/star/delete")
 
     # Ranking API
-    ranking_ns = api_.namespace("/ranking")
+    ranking_ns = api_.namespace("ranking")
     ranking_ns.add_resource(RankingStatisticsView, "/statistics")
     ranking_ns.add_resource(GuildOverviewView, "/guilds")
     ranking_ns.add_resource(GuildDetailedView, "/guilds/<path:name>")
