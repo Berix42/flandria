@@ -13,7 +13,9 @@ const MobileMenuSection = ({ header, children }) => (
   </div>
 );
 
-const MobileMenuLink = ({ to, children, external }) => {
+const MobileMenuLink = ({
+  to, children, external, onClick,
+}) => {
   const className = 'text-sm font-semibold text-slate-500 hover:text-slate-900 dark:text-white dark:hover:text-dark-primary';
 
   if (external) {
@@ -33,7 +35,7 @@ const MobileMenuLink = ({ to, children, external }) => {
 
   return (
     <li>
-      <Link className={className} to={to}>
+      <Link className={className} to={to} onClick={onClick}>
         {children}
       </Link>
     </li>
@@ -42,36 +44,36 @@ const MobileMenuLink = ({ to, children, external }) => {
 
 const MobileSideMenu = ({ closeMenu, isLoggedIn }) => (
   <>
-    <div className="absolute top-0 left-0 z-50 w-8/12 h-full max-w-xs px-2 overflow-auto bg-white divide-y dark:bg-dark-2 dark:divide-dark-3">
+    <div className="fixed inset-y-0 left-0 z-50 sm:w-8/12 max-w-xs px-2 overflow-auto bg-white divide-y dark:bg-dark-2 dark:divide-dark-3">
       <img className="w-auto h-24 p-2" src={getImagePath('logo.png')} alt="Florensia Logo" />
       <MobileMenuSection header="Navigation">
-        <MobileMenuLink to="/database/monster">Monsters</MobileMenuLink>
-        <MobileMenuLink to="/database">Items</MobileMenuLink>
-        <MobileMenuLink to="/database/quest">Quests</MobileMenuLink>
+        <MobileMenuLink to="/database/monster" onClick={closeMenu}>Monsters</MobileMenuLink>
+        <MobileMenuLink to="/database" onClick={closeMenu}>Items</MobileMenuLink>
+        <MobileMenuLink to="/database/quest" onClick={closeMenu}>Quests</MobileMenuLink>
       </MobileMenuSection>
       <MobileMenuSection header="Planner">
-        <MobileMenuLink to="/planner/explorer">Explorer</MobileMenuLink>
-        <MobileMenuLink to="/planner/noble">Noble</MobileMenuLink>
-        <MobileMenuLink to="/planner/saint">Saint</MobileMenuLink>
-        <MobileMenuLink to="/planner/mercenary">Mercenary</MobileMenuLink>
-        <MobileMenuLink to="/planner/ship">Ship</MobileMenuLink>
+        <MobileMenuLink to="/planner/explorer" onClick={closeMenu}>Explorer</MobileMenuLink>
+        <MobileMenuLink to="/planner/noble" onClick={closeMenu}>Noble</MobileMenuLink>
+        <MobileMenuLink to="/planner/saint" onClick={closeMenu}>Saint</MobileMenuLink>
+        <MobileMenuLink to="/planner/mercenary" onClick={closeMenu}>Mercenary</MobileMenuLink>
+        <MobileMenuLink to="/planner/ship" onClick={closeMenu}>Ship</MobileMenuLink>
       </MobileMenuSection>
       <MobileMenuSection header="More">
-        <MobileMenuLink to="/map">Maps</MobileMenuLink>
-        <MobileMenuLink to="/database/npc">NPCs</MobileMenuLink>
-        <MobileMenuLink to="/ranking/guilds">Guilds Ranking</MobileMenuLink>
+        <MobileMenuLink to="/map" onClick={closeMenu}>Maps</MobileMenuLink>
+        <MobileMenuLink to="/database/npc" onClick={closeMenu}>NPCs</MobileMenuLink>
+        <MobileMenuLink to="/ranking/guilds" onClick={closeMenu}>Guilds Ranking</MobileMenuLink>
         <MobileMenuLink to="/static/files/essence_system_en.pdf" external>[EN] Essence Guide</MobileMenuLink>
         <MobileMenuLink to="/static/files/essence_system_de.pdf" external>[DE] Essence Guide</MobileMenuLink>
       </MobileMenuSection>
       <MobileMenuSection header="Account">
         {isLoggedIn
           ? (
-            <MobileMenuLink to="/auth/logout">Logout</MobileMenuLink>
+            <MobileMenuLink to="/auth/logout" onClick={closeMenu}>Logout</MobileMenuLink>
           )
           : (
             <>
-              <MobileMenuLink to="/auth/register">Sign Up</MobileMenuLink>
-              <MobileMenuLink to="/auth/login">Sign In</MobileMenuLink>
+              <MobileMenuLink to="/auth/register" onClick={closeMenu}>Sign Up</MobileMenuLink>
+              <MobileMenuLink to="/auth/login" onClick={closeMenu}>Sign In</MobileMenuLink>
             </>
           )}
       </MobileMenuSection>
@@ -80,7 +82,7 @@ const MobileSideMenu = ({ closeMenu, isLoggedIn }) => (
       onClick={closeMenu}
       role="button"
       aria-hidden="true"
-      className="absolute top-0 bottom-0 left-0 right-0 z-20 bg-black opacity-30"
+      className="fixed inset-0 bg-black opacity-30"
     />
   </>
 );
