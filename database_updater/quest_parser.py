@@ -290,7 +290,7 @@ def parse_string_data_file(filepath: str, language: str) -> typing.List[dict]:
 def parse_quests() -> typing.List[typing.Dict[str, typing.Union[list, dict]]]:
     # We parse QuestIndex.xml to figure out which quests we all want.
     # (There are A LOT of unused quests that break a lot of things..)
-    tree = ET.parse(os.path.join(QUESTS_FOLDER, "QuestIndex.xml"),
+    tree = ET.parse(os.path.join(QUESTS_FOLDER, "questindex.xml"),
                     parser=ET.XMLParser(encoding="utf-8"))
     root = tree.getroot()
 

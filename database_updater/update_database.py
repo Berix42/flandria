@@ -86,17 +86,17 @@ def update_database(tables: typing.Tuple[str]) -> None:
 
         # Insert description data
         files = [
-            ("StringData_EN.ini", "en"),
-            ("StringData_CN.ini", "cn"),
-            ("StringData_ESP.ini", "es"),
-            ("StringData_FR.ini", "fr"),
-            ("StringData_GER.ini", "de"),
-            ("StringData_IT.ini", "it"),
-            ("StringData_JP.ini", "jp"),
-            ("StringData_KR.ini", "kr"),
-            ("StringData_PT.ini", "pt"),
-            ("StringData_TR.ini", "tr"),
-            ("StringData_TW.ini", "tw"),
+            ("stringdata_en.ini", "en"),
+            ("stringdata_cn.ini", "cn"),
+            ("stringdata_esp.ini", "es"),
+            ("stringdata_fr.ini", "fr"),
+            ("stringdata_ger.ini", "de"),
+            ("stringdata_it.ini", "it"),
+            ("stringdata_jp.ini", "jp"),
+            ("stringdata_kr.ini", "kr"),
+            ("stringdata_pt.ini", "pt"),
+            ("stringdata_tr.ini", "tr"),
+            ("stringdata_tw.ini", "tw"),
         ]
 
         # Dict is used to map quests a title.
