@@ -35,6 +35,9 @@ def create_app() -> Flask:
         TEST_STR: TestingConfig
     }
 
+    # Enable api-validation via swagger-definition application-wide for every endpoint
+    app.config['RESTX_VALIDATE'] = True
+
     # Load config corresponding to current environment
     APP_ENV = os.environ.get("APP_ENV", DEV_STR)
     app.config.from_object(app_env_cases[APP_ENV] if APP_ENV in app_env_cases else DevelopmentConfig)
