@@ -8,17 +8,6 @@ function getImagePath(name) {
   return `/static/assets/${name}`;
 }
 
-function getApiUrl() {
-  if (process.env.NODE_ENV === 'development') {
-    // Local flask development server
-    return 'http://127.0.0.1:5000/api';
-  }
-
-  // In production, the api url is the same as the current
-  // location. It is just extended by /api.
-  return '/api';
-}
-
 function resolveLandClassNames(string) {
   if (!string) return null;
   if (string === 'WENS') return 'All';
@@ -154,7 +143,6 @@ function setWindowTitle(title) {
 
 export {
   getImagePath,
-  getApiUrl,
   resolveLandClassNames,
   resolveSeaClassNames,
   tablenameToTitle,

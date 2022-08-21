@@ -1,16 +1,16 @@
-/* eslint-disable no-unused-vars */
 import Axios from 'axios';
 import React, { useEffect, useState } from 'react';
 import { useNavigate, useLocation } from 'react-router-dom';
 import Select from 'react-select';
 import TopBarProgress from 'react-topbar-progress-indicator';
-import { getApiUrl, setWindowTitle } from '../../helpers';
+import { setWindowTitle } from '../../helpers';
 import useDidMountEffect from '../../useDidMountEffect';
 import { getQueryParameterOrDefault } from '../database/TableView/TableView';
 import TableViewItem from '../database/TableView/TableViewItem';
 import useAsyncError from '../errors/useAsyncError';
 import Breadcrumbs from '../shared/Breadcrumbs';
 import Pagination from '../shared/Pagination';
+import { apiUrl } from '../../constants';
 
 const serverSelectOptions = [
   {
@@ -44,7 +44,7 @@ const GuildOverview = () => {
 
   const getFormattedApiUrl = () => {
     const searchParams = new URLSearchParams(location.search).toString();
-    return `${getApiUrl()}/ranking/guilds?${searchParams}`;
+    return `${apiUrl}/ranking/guilds?${searchParams}`;
   };
 
   useEffect(() => {

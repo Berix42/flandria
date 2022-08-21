@@ -3,12 +3,14 @@ import { useParams } from 'react-router-dom';
 import ReactDOMServer from 'react-dom/server';
 import TopBarProgress from 'react-topbar-progress-indicator';
 import Axios from 'axios';
-import { getApiUrl, setWindowTitle } from '../../../helpers';
+import { setWindowTitle } from '../../../helpers';
 import InformationWidget from './Widgets/InformationWidget';
 import QuestsWidget from './Widgets/QuestsWidget';
 import Grid, { Column } from '../../shared/Grid';
 import DropsWidget from './Widgets/DropsWidget';
-import { armorTables, shipTables, weaponTables } from '../../../constants';
+import {
+  apiUrl, armorTables, shipTables, weaponTables,
+} from '../../../constants';
 import SkillWidget from './Widgets/SkillWidget';
 import UpgradeWidget from './Widgets/UpgradeWidget';
 import DroppedByWidget from './Widgets/DroppedByWidget';
@@ -38,7 +40,7 @@ const DetailedTableView = () => {
   const throwError = useAsyncError();
 
   useEffect(() => {
-    const url = `${getApiUrl()}/database/${tablename}/${code}`;
+    const url = `${apiUrl}/database/${tablename}/${code}`;
     const fetchData = async () => {
       try {
         const result = await Axios.get(url);
