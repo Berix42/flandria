@@ -1,9 +1,8 @@
-import Axios from 'axios';
 import React, { useEffect, useState } from 'react';
 import { Link, useLocation, useNavigate } from 'react-router-dom';
-import { getApiUrl, setWindowTitle } from '../../helpers';
-import { loginUser } from './auth';
+import { setWindowTitle } from '../../helpers';
 import AuthWrapper from './AuthWrapper';
+import { login, loginUser } from '../../services/AuthService';
 
 const LoginView = () => {
   const navigate = useNavigate();
@@ -37,9 +36,7 @@ const LoginView = () => {
     // Request a JWT token
     // Redirect to the home page on success
     try {
-      const resp = await Axios.post(`${getApiUrl()}/auth/login`, {
-        username, password,
-      });
+      const resp = await login(username, password);
       loginUser(resp.data.access_token);
       // Redirect back to origin page with state
       navigate(location.state?.from ?? '/', { replace: true, state: location.state });

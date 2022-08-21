@@ -2,9 +2,9 @@ import { Menu, Switch, Transition } from '@headlessui/react';
 import React, { useEffect, useState } from 'react';
 import { Link } from 'react-router-dom';
 import { getImagePath } from '../../../helpers';
-import { getIdentity, isAuthenticated } from '../../auth/auth';
 import ItemSearchBar from '../../shared/ItemSearchBar';
 import MobileMenuButton from './MobileMenuButton';
+import { getIdentity, isAuthenticated } from '../../../services/AuthService';
 
 const NavLink = ({ to, children }) => (
   <Link
