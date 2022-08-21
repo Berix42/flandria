@@ -1,8 +1,8 @@
-import Axios from 'axios';
 import React, { useEffect, useState } from 'react';
 import { useLocation, useNavigate } from 'react-router-dom';
-import { getApiUrl, setWindowTitle } from '../../helpers';
+import { setWindowTitle } from '../../helpers';
 import AuthWrapper from './AuthWrapper';
+import { register } from '../../services/AuthService';
 
 const RegisterView = () => {
   const navigate = useNavigate();
@@ -43,9 +43,7 @@ const RegisterView = () => {
     // Try to create a new user, if it fails, add error message.
     // If user was created without an error, redirec to login
     try {
-      await Axios.post(`${getApiUrl()}/auth/register`, {
-        username, password,
-      });
+      await register(username, password);
       navigate(location.state?.from ?? '/auth/login', { replace: true, state: location.state });
     } catch (error) {
       const errorMessage = error.response.data.message;

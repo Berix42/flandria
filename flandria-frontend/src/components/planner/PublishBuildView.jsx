@@ -5,7 +5,7 @@ import { HiCursorClick } from 'react-icons/hi';
 import { useNavigate, useLocation } from 'react-router-dom';
 import Axios from 'axios';
 import { getApiUrl, setWindowTitle } from '../../helpers';
-import { getToken } from '../auth/auth';
+import { getToken } from '../../services/AuthService';
 
 const formContainerClassname = 'flex flex-col flex-grow space-y-2';
 
