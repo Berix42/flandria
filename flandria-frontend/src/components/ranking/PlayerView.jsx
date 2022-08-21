@@ -1,9 +1,8 @@
 /* eslint-disable camelcase */
-import Axios from 'axios';
 import React, { useEffect, useState } from 'react';
 import { useParams } from 'react-router-dom';
 import TopBarProgress from 'react-topbar-progress-indicator';
-import { apiUrl, characterClassToIconName } from '../../constants';
+import { characterClassToIconName } from '../../constants';
 import { getImagePath, setWindowTitle } from '../../helpers';
 import InformationWidget from '../database/DetailedTableView/Widgets/InformationWidget';
 import ListWidget, { TextListWidgetItem } from '../database/DetailedTableView/Widgets/ListWidget';
@@ -11,6 +10,7 @@ import useAsyncError from '../errors/useAsyncError';
 import Breadcrumbs from '../shared/Breadcrumbs';
 import Grid, { Column } from '../shared/Grid';
 import IconGroup from '../shared/IconGroup';
+import { getPlayerRanking } from '../../services/RankingService';
 
 const PlayerHistoryItem = ({ historyObj }) => {
   const dateString = new Date(historyObj.inserted_at).toLocaleDateString();
@@ -64,11 +64,9 @@ const PlayerView = () => {
   const throwError = useAsyncError();
 
   useEffect(() => {
-    const url = `${apiUrl}/ranking/players/${server}/${name}`;
-
     const fetchData = async () => {
       try {
-        const result = await Axios.get(url);
+        const result = await getPlayerRanking(server, name);
 
         setData(result.data);
         setIsLoading(false);
