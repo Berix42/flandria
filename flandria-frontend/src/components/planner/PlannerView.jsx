@@ -1,4 +1,3 @@
-import Axios from 'axios';
 import React, { useEffect, useState } from 'react';
 import { HiCollection } from 'react-icons/hi';
 import { Link, useParams } from 'react-router-dom';
@@ -12,7 +11,7 @@ import IconGroup from '../shared/IconGroup';
 import Hash from './Hash';
 import SkillTree from './SkillTree';
 import StatusPlanner from './StatusPlanner';
-import { apiUrl } from '../../constants';
+import { getPlanner } from '../../services/BuildPlannerService';
 
 const PlannerView = () => {
   const { classname } = useParams();
@@ -22,12 +21,10 @@ const PlannerView = () => {
   const [hash, setHash] = useState(null);
 
   useEffect(() => {
-    const url = `${apiUrl}/planner/${classname}`;
-
     const fetchData = async () => {
       try {
         // Fetch result
-        const result = await Axios.get(url);
+        const result = await getPlanner(classname);
 
         // Create and load hash
         const hashInstance = new Hash(
