@@ -1,4 +1,3 @@
-import Axios from 'axios';
 import React, { useEffect, useState } from 'react';
 import { useNavigate, useLocation } from 'react-router-dom';
 import Select from 'react-select';
@@ -10,7 +9,7 @@ import TableViewItem from '../database/TableView/TableViewItem';
 import useAsyncError from '../errors/useAsyncError';
 import Breadcrumbs from '../shared/Breadcrumbs';
 import Pagination from '../shared/Pagination';
-import { apiUrl } from '../../constants';
+import { getGuildsRanking } from '../../services/RankingService';
 
 const serverSelectOptions = [
   {
@@ -42,20 +41,13 @@ const GuildOverview = () => {
     getQueryParameterOrDefault('server', 'both'),
   );
 
-  const getFormattedApiUrl = () => {
-    const searchParams = new URLSearchParams(location.search).toString();
-    return `${apiUrl}/ranking/guilds?${searchParams}`;
-  };
-
   useEffect(() => {
-    const url = getFormattedApiUrl();
-
     const fetchData = async () => {
       try {
-        const result = await Axios.get(url);
+        const result = await getGuildsRanking(new URLSearchParams(location.search).toString());
 
         setData({
-          url,
+          searchParams: location.search,
           data: result.data,
         });
         setIsLoading(false);
@@ -122,7 +114,7 @@ const GuildOverview = () => {
         />
       </div>
       <div className="mt-3">
-        {(data && !isLoading && (data.url === getFormattedApiUrl())) && (
+        {(data && !isLoading && (data.searchParams === location.search)) && (
         <>
           <div className="grid grid-cols-1 gap-3 py-3 md:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4">
             {data.data.items.map((guild) => (

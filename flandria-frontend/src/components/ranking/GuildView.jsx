@@ -1,4 +1,3 @@
-import Axios from 'axios';
 import React, { useEffect, useState } from 'react';
 import { useParams } from 'react-router-dom';
 import TopBarProgress from 'react-topbar-progress-indicator';
@@ -8,7 +7,7 @@ import ListWidget, { ItemListWidgetItem } from '../database/DetailedTableView/Wi
 import useAsyncError from '../errors/useAsyncError';
 import Breadcrumbs from '../shared/Breadcrumbs';
 import Grid, { Column } from '../shared/Grid';
-import { apiUrl } from '../../constants';
+import { getGuildRanking } from '../../services/RankingService';
 
 const GuildView = () => {
   const { guildName } = useParams();
@@ -19,11 +18,9 @@ const GuildView = () => {
   const throwError = useAsyncError();
 
   useEffect(() => {
-    const url = `${apiUrl}/ranking/guilds/${guildName}`;
-
     const fetchData = async () => {
       try {
-        const result = await Axios.get(url);
+        const result = await getGuildRanking(guildName);
 
         setData(result.data);
         setIsLoading(false);
