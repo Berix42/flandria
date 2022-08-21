@@ -1,9 +1,8 @@
 import Axios from 'axios';
 import decode from 'jwt-decode';
-import { getApiUrl } from '../helpers';
+import { apiUrl } from '../constants';
 
 const localStorageKey = 'ACCESS_TOKEN_FLANDRIA_V1.2';
-const apiUrl = getApiUrl();
 
 function login(username, password) {
   return Axios.post(`${apiUrl}/auth/login`, { username, password });

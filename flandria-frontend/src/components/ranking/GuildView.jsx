@@ -2,12 +2,13 @@ import Axios from 'axios';
 import React, { useEffect, useState } from 'react';
 import { useParams } from 'react-router-dom';
 import TopBarProgress from 'react-topbar-progress-indicator';
-import { getApiUrl, setWindowTitle } from '../../helpers';
+import { setWindowTitle } from '../../helpers';
 import InformationWidget from '../database/DetailedTableView/Widgets/InformationWidget';
 import ListWidget, { ItemListWidgetItem } from '../database/DetailedTableView/Widgets/ListWidget';
 import useAsyncError from '../errors/useAsyncError';
 import Breadcrumbs from '../shared/Breadcrumbs';
 import Grid, { Column } from '../shared/Grid';
+import { apiUrl } from '../../constants';
 
 const GuildView = () => {
   const { guildName } = useParams();
@@ -18,7 +19,7 @@ const GuildView = () => {
   const throwError = useAsyncError();
 
   useEffect(() => {
-    const url = `${getApiUrl()}/ranking/guilds/${guildName}`;
+    const url = `${apiUrl}/ranking/guilds/${guildName}`;
 
     const fetchData = async () => {
       try {

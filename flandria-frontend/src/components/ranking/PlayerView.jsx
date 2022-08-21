@@ -3,8 +3,8 @@ import Axios from 'axios';
 import React, { useEffect, useState } from 'react';
 import { useParams } from 'react-router-dom';
 import TopBarProgress from 'react-topbar-progress-indicator';
-import { characterClassToIconName } from '../../constants';
-import { getApiUrl, getImagePath, setWindowTitle } from '../../helpers';
+import { apiUrl, characterClassToIconName } from '../../constants';
+import { getImagePath, setWindowTitle } from '../../helpers';
 import InformationWidget from '../database/DetailedTableView/Widgets/InformationWidget';
 import ListWidget, { TextListWidgetItem } from '../database/DetailedTableView/Widgets/ListWidget';
 import useAsyncError from '../errors/useAsyncError';
@@ -64,7 +64,7 @@ const PlayerView = () => {
   const throwError = useAsyncError();
 
   useEffect(() => {
-    const url = `${getApiUrl()}/ranking/players/${server}/${name}`;
+    const url = `${apiUrl}/ranking/players/${server}/${name}`;
 
     const fetchData = async () => {
       try {

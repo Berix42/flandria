@@ -203,7 +203,11 @@ const effectCodes = [
   { label: null, value: 173 },
 ];
 
+// In production, the api url is the same as the current
+// location. It is just extended by /api.
+const apiUrl = process.env.NODE_ENV === 'development' ? 'http://127.0.0.1:5000/api' : '/api';
+
 export {
   weaponTables, armorTables, shipTables, effectCodes,
-  characterClassToIconName,
+  characterClassToIconName, apiUrl,
 };
