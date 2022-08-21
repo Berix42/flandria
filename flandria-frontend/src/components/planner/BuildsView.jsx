@@ -9,9 +9,9 @@ import {
 } from '../../helpers';
 import useAsyncError from '../errors/useAsyncError';
 import Breadcrumbs from '../shared/Breadcrumbs';
-import { isAuthenticated, getIdentity, getToken } from '../auth/auth';
 import IconGroup from '../shared/IconGroup';
 import { characterClassToIconName } from '../../constants';
+import { getIdentity, getToken, isAuthenticated } from '../../services/AuthService';
 
 const BuildsView = () => {
   const { classname } = useParams();
