@@ -5,12 +5,12 @@ import TopBarProgress from 'react-topbar-progress-indicator';
 import { AiFillStar, AiOutlineStar } from 'react-icons/ai';
 import { HiTrash } from 'react-icons/hi';
 import {
-  getApiUrl, getImagePath, setWindowTitle, tablenameToTitle,
+  getImagePath, setWindowTitle, tablenameToTitle,
 } from '../../helpers';
 import useAsyncError from '../errors/useAsyncError';
 import Breadcrumbs from '../shared/Breadcrumbs';
 import IconGroup from '../shared/IconGroup';
-import { characterClassToIconName } from '../../constants';
+import { apiUrl, characterClassToIconName } from '../../constants';
 import { getIdentity, getToken, isAuthenticated } from '../../services/AuthService';
 
 const BuildsView = () => {
@@ -20,7 +20,7 @@ const BuildsView = () => {
   const throwError = useAsyncError();
 
   const fetchData = async () => {
-    const url = `${getApiUrl()}/planner/${classname}/builds`;
+    const url = `${apiUrl}/planner/${classname}/builds`;
 
     try {
       const result = await Axios(url);
@@ -43,7 +43,7 @@ const BuildsView = () => {
 
     // eslint-disable-next-line no-alert, no-restricted-globals
     if (confirm('Really delete the build?')) {
-      const url = `${getApiUrl()}/planner/builds/${buildId}/delete`;
+      const url = `${apiUrl}/planner/builds/${buildId}/delete`;
       await Axios.delete(url, {
         headers: { Authorization: `Bearer ${getToken()}` },
       });
@@ -62,14 +62,14 @@ const BuildsView = () => {
         // Delete
         url = `planner/builds/${buildId}/star/delete`;
 
-        await Axios.delete(`${getApiUrl()}/${url}`, {
+        await Axios.delete(`${apiUrl}/${url}`, {
           headers: { Authorization: `Bearer ${getToken()}` },
         });
       } else {
         // Add
         url = `planner/builds/${buildId}/star/add`;
 
-        await Axios.post(`${getApiUrl()}/${url}`, {}, {
+        await Axios.post(`${apiUrl}/${url}`, {}, {
           headers: { Authorization: `Bearer ${getToken()}` },
         });
       }

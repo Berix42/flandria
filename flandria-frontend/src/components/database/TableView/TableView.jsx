@@ -7,9 +7,10 @@ import Breadcrumbs from '../../shared/Breadcrumbs';
 import FilterMenu from './FilterMenu';
 import useDidMountEffect from '../../../useDidMountEffect';
 import TableViewItem from './TableViewItem';
-import { getApiUrl, setWindowTitle, tablenameToTitle } from '../../../helpers';
+import { setWindowTitle, tablenameToTitle } from '../../../helpers';
 import Pagination from '../../shared/Pagination';
 import useAsyncError from '../../errors/useAsyncError';
+import { apiUrl } from '../../../constants';
 
 function getQueryParameterOrDefault(key, defaultValue) {
   const params = new URLSearchParams(window.location.search);
@@ -51,7 +52,7 @@ const TableView = () => {
 
   const getUrlWithParameters = () => {
     const searchParams = new URLSearchParams(filter).toString();
-    return `${getApiUrl()}/database/${tablename}?${searchParams}`;
+    return `${apiUrl}/database/${tablename}?${searchParams}`;
   };
 
   useEffect(() => {

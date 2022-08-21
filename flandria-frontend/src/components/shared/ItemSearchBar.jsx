@@ -3,10 +3,11 @@ import axios from 'axios';
 import { Transition } from '@headlessui/react';
 import { Link } from 'react-router-dom';
 import { useDebouncedCallback } from 'use-debounce';
-import { getApiUrl, tablenameToTitle } from '../../helpers';
+import { tablenameToTitle } from '../../helpers';
 import Icon from './Icon';
 import ItemSubs from './ItemSubs';
 import ItemDuration from './ItemDuration';
+import { apiUrl } from '../../constants';
 
 const SearchResultItem = ({ tableKey, item, onItemClick }) => {
   let rareGrade = 0;
@@ -103,7 +104,7 @@ const ItemSearchBar = ({ inputContainerClassName = '', resultContainerClassName 
       return;
     }
 
-    const url = `${getApiUrl()}/database/search?s=${searchString}`;
+    const url = `${apiUrl}/database/search?s=${searchString}`;
     const fetchSearchResults = async () => {
       setIsSearching(true);
       const result = await axios(url);

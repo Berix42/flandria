@@ -4,7 +4,7 @@ import { HiCollection } from 'react-icons/hi';
 import { Link, useParams } from 'react-router-dom';
 import TopBarProgress from 'react-topbar-progress-indicator';
 import {
-  getApiUrl, getImagePath, setWindowTitle, tablenameToTitle,
+  getImagePath, setWindowTitle, tablenameToTitle,
 } from '../../helpers';
 import useAsyncError from '../errors/useAsyncError';
 import Breadcrumbs from '../shared/Breadcrumbs';
@@ -12,6 +12,7 @@ import IconGroup from '../shared/IconGroup';
 import Hash from './Hash';
 import SkillTree from './SkillTree';
 import StatusPlanner from './StatusPlanner';
+import { apiUrl } from '../../constants';
 
 const PlannerView = () => {
   const { classname } = useParams();
@@ -21,7 +22,7 @@ const PlannerView = () => {
   const [hash, setHash] = useState(null);
 
   useEffect(() => {
-    const url = `${getApiUrl()}/planner/${classname}`;
+    const url = `${apiUrl}/planner/${classname}`;
 
     const fetchData = async () => {
       try {

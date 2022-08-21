@@ -1,10 +1,10 @@
 import Axios from 'axios';
 import React, { useEffect, useState } from 'react';
 import TopBarProgress from 'react-topbar-progress-indicator';
-import { getApiUrl } from '../../helpers';
 import useAsyncError from '../errors/useAsyncError';
 import CharacterCountBarChart from './charts/CharacterCountBarChart';
 import CharacterCountPieCharts from './charts/CharacterCountPieCharts';
+import { apiUrl } from '../../constants';
 
 const Statistics = () => {
   const [isLoading, setIsLoading] = useState(true);
@@ -14,7 +14,7 @@ const Statistics = () => {
   const throwError = useAsyncError();
 
   useEffect(() => {
-    const url = `${getApiUrl()}/ranking/statistics?min_level_land=${minLevelLand}`;
+    const url = `${apiUrl}/ranking/statistics?min_level_land=${minLevelLand}`;
     const fetchData = async () => {
       try {
         const result = await Axios(url);

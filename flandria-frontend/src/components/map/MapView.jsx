@@ -2,13 +2,14 @@ import Axios from 'axios';
 import React, { useEffect, useState } from 'react';
 import { useParams } from 'react-router-dom';
 import TopBarProgress from 'react-topbar-progress-indicator';
-import { getApiUrl, setWindowTitle } from '../../helpers';
+import { setWindowTitle } from '../../helpers';
 import useAsyncError from '../errors/useAsyncError';
 import Breadcrumbs from '../shared/Breadcrumbs';
 import Grid, { Column } from '../shared/Grid';
 import Icon from '../shared/Icon';
 import ItemSubs from '../shared/ItemSubs';
 import MapCanvas from './MapCanvas';
+import { apiUrl } from '../../constants';
 
 const ToggleMonsterButton = ({
   monster, onToggleActive, onToggleDeactive, isActive,
@@ -67,7 +68,7 @@ const MapView = () => {
   };
 
   useEffect(() => {
-    const url = `${getApiUrl()}/database/map/${mapCode}`;
+    const url = `${apiUrl}/database/map/${mapCode}`;
     const fetchData = async () => {
       try {
         const result = await Axios.get(url);
