@@ -24,5 +24,6 @@ module.exports = {
     'prefer-destructuring': ['error', { object: false, array: false }],
     'import/no-extraneous-dependencies': ['error', { devDependencies: false }],
     'react/function-component-definition': [2, { namedComponents: 'arrow-function', unnamedComponents: 'arrow-function' }],
+    'no-unused-expressions': ['error', { allowTernary: true }],
   },
 };
