@@ -1,7 +1,6 @@
 import { Transition } from '@headlessui/react';
 import React, { useEffect, useState } from 'react';
 import { useNavigate, useLocation, useParams } from 'react-router-dom';
-import Axios from 'axios';
 import TopBarProgress from 'react-topbar-progress-indicator';
 import Breadcrumbs from '../../shared/Breadcrumbs';
 import FilterMenu from './FilterMenu';
@@ -10,7 +9,7 @@ import TableViewItem from './TableViewItem';
 import { setWindowTitle, tablenameToTitle } from '../../../helpers';
 import Pagination from '../../shared/Pagination';
 import useAsyncError from '../../errors/useAsyncError';
-import { apiUrl } from '../../../constants';
+import { getFilteredData } from '../../../services/DatabaseDataService';
 
 function getQueryParameterOrDefault(key, defaultValue) {
   const params = new URLSearchParams(window.location.search);
@@ -50,23 +49,17 @@ const TableView = () => {
   const [data, setData] = useState(null);
   const [isLoading, setIsLoading] = useState(true);
 
-  const getUrlWithParameters = () => {
-    const searchParams = new URLSearchParams(filter).toString();
-    return `${apiUrl}/database/${tablename}?${searchParams}`;
-  };
-
   useEffect(() => {
     if (location.state && location.state.filtersChanged) {
       // Update window title
       setWindowTitle(tablenameToTitle(tablename));
 
       // Refetch data
-      const url = getUrlWithParameters();
       const fetchData = async () => {
         try {
-          const result = await Axios(url);
+          const result = await getFilteredData(tablename, new URLSearchParams(filter).toString());
           setData({
-            url,
+            filter,
             data: result.data,
           });
           setIsLoading(false);
@@ -132,7 +125,7 @@ const TableView = () => {
           />
         </Transition>
       </div>
-      {(data && !isLoading && (data.url === getUrlWithParameters())) && (
+      {(data && !isLoading && (data.filter === filter)) && (
         <>
           <div className="grid grid-cols-1 gap-3 py-3 md:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4">
             {data.data.items.map((item) => (
