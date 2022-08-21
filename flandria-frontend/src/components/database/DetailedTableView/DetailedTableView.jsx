@@ -2,14 +2,13 @@ import React, { useEffect, useState } from 'react';
 import { useParams } from 'react-router-dom';
 import ReactDOMServer from 'react-dom/server';
 import TopBarProgress from 'react-topbar-progress-indicator';
-import Axios from 'axios';
 import { setWindowTitle } from '../../../helpers';
 import InformationWidget from './Widgets/InformationWidget';
 import QuestsWidget from './Widgets/QuestsWidget';
 import Grid, { Column } from '../../shared/Grid';
 import DropsWidget from './Widgets/DropsWidget';
 import {
-  apiUrl, armorTables, shipTables, weaponTables,
+  armorTables, shipTables, weaponTables,
 } from '../../../constants';
 import SkillWidget from './Widgets/SkillWidget';
 import UpgradeWidget from './Widgets/UpgradeWidget';
@@ -30,6 +29,7 @@ import QuestMissionsWidget from './Widgets/QuestMissionsWidget';
 import QuestRewardsWidgets from './Widgets/QuestRewardsWidget';
 import MonsterMapsWidget from './Widgets/MonsterMapsWidget';
 import useAsyncError from '../../errors/useAsyncError';
+import { getDetailedData } from '../../../services/DatabaseDataService';
 
 const isEmptyComponent = (children) => !ReactDOMServer.renderToStaticMarkup(children);
 
@@ -40,10 +40,9 @@ const DetailedTableView = () => {
   const throwError = useAsyncError();
 
   useEffect(() => {
-    const url = `${apiUrl}/database/${tablename}/${code}`;
     const fetchData = async () => {
       try {
-        const result = await Axios.get(url);
+        const result = await getDetailedData(tablename, code);
 
         setFetchResult({
           tablename,
