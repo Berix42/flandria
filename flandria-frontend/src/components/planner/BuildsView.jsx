@@ -1,4 +1,3 @@
-import Axios from 'axios';
 import React, { useEffect, useState } from 'react';
 import { Link, useParams } from 'react-router-dom';
 import TopBarProgress from 'react-topbar-progress-indicator';
@@ -10,8 +9,10 @@ import {
 import useAsyncError from '../errors/useAsyncError';
 import Breadcrumbs from '../shared/Breadcrumbs';
 import IconGroup from '../shared/IconGroup';
-import { apiUrl, characterClassToIconName } from '../../constants';
-import { getIdentity, getToken, isAuthenticated } from '../../services/AuthService';
+import { characterClassToIconName } from '../../constants';
+import { getIdentity, isAuthenticated } from '../../services/AuthService';
+import { deleteBuild, getBuilds } from '../../services/BuildPlannerService';
+import { addStar, deleteStar } from '../../services/BuildStarService';
 
 const BuildsView = () => {
   const { classname } = useParams();
@@ -20,10 +21,8 @@ const BuildsView = () => {
   const throwError = useAsyncError();
 
   const fetchData = async () => {
-    const url = `${apiUrl}/planner/${classname}/builds`;
-
     try {
-      const result = await Axios(url);
+      const result = await getBuilds(classname);
       setData(result.data);
       setIsLoading(false);
     } catch (error) {
@@ -38,16 +37,12 @@ const BuildsView = () => {
     fetchData();
   }, []);
 
-  const deleteBuild = async (event, buildId) => {
+  const onDeleteClick = async (event, buildId) => {
     event.preventDefault();
 
     // eslint-disable-next-line no-alert, no-restricted-globals
     if (confirm('Really delete the build?')) {
-      const url = `${apiUrl}/planner/builds/${buildId}/delete`;
-      await Axios.delete(url, {
-        headers: { Authorization: `Bearer ${getToken()}` },
-      });
-
+      await deleteBuild(buildId);
       setData([...data.filter((build) => build.id !== buildId)]);
     }
   };
@@ -56,23 +51,7 @@ const BuildsView = () => {
     event.preventDefault();
 
     if (isAuthenticated()) {
-      let url = '';
-
-      if (userHasLiked) {
-        // Delete
-        url = `planner/builds/${buildId}/star/delete`;
-
-        await Axios.delete(`${apiUrl}/${url}`, {
-          headers: { Authorization: `Bearer ${getToken()}` },
-        });
-      } else {
-        // Add
-        url = `planner/builds/${buildId}/star/add`;
-
-        await Axios.post(`${apiUrl}/${url}`, {}, {
-          headers: { Authorization: `Bearer ${getToken()}` },
-        });
-      }
+      userHasLiked ? await deleteStar(buildId) : await addStar(buildId);
 
       // Update data to reflect the new changes
       const buildsWithoutChangedOne = [...data.filter((b) => b.id !== buildId)];
@@ -164,7 +143,7 @@ const BuildsView = () => {
                         </button>
                         {((userId === build.user.id) || getIdentity().admin) && (
                         <HiTrash
-                          onClick={(e) => deleteBuild(e, build.id)}
+                          onClick={(e) => onDeleteClick(e, build.id)}
                           class="w-6 h-6 hover:text-red-500 text-red-400 transition-colors duration-75"
                         />
                         )}

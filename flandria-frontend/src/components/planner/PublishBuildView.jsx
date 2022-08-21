@@ -3,10 +3,8 @@
 import React, { useEffect, useState } from 'react';
 import { HiCursorClick } from 'react-icons/hi';
 import { useNavigate, useLocation } from 'react-router-dom';
-import Axios from 'axios';
 import { setWindowTitle } from '../../helpers';
-import { getToken } from '../../services/AuthService';
-import { apiUrl } from '../../constants';
+import { addBuild } from '../../services/BuildPlannerService';
 
 const formContainerClassname = 'flex flex-col flex-grow space-y-2';
 
@@ -38,14 +36,7 @@ const PublishBuildView = () => {
     }
 
     try {
-      await Axios.post(`${apiUrl}/planner/builds/add`, {
-        title,
-        description,
-        hash,
-        character_class,
-      }, {
-        headers: { Authorization: `Bearer ${getToken()}` },
-      });
+      await addBuild(title, description, hash, character_class);
       navigate(`/planner/${url_classname}/builds`, { replace: true });
     } catch (error) {
       const errorMessage = error.response.data.message;
