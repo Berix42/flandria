@@ -2,7 +2,7 @@ from flask import request
 from flask_jwt_extended import (current_user,
                                 verify_jwt_in_request)
 from flask_restx import Resource, abort
-from webapp.extensions import db
+from webapp.extensions import db, api_
 from webapp.models.enums import CharacterClass
 from webapp.models.tables.planner_build import PlannerBuild, PlannerStar
 
@@ -102,7 +102,10 @@ class PlannerBuildView(Resource):
         return {}, 204
 
 
+@api_.param('build_id', 'Technical identifier to select a specific build')
 class PlannerStarView(Resource):
+    @api_.response(201, '')
+    @api_.response(409, 'Star already exists')
     def post(self, build_id: int):
         verify_jwt_in_request()
 
@@ -121,6 +124,9 @@ class PlannerStarView(Resource):
         ))
         db.session.commit()
 
+        return {}, 201
+
+    @api_.response(204, '')
     def delete(self, build_id: int):
         verify_jwt_in_request()
 
@@ -130,3 +136,5 @@ class PlannerStarView(Resource):
         ).delete()
 
         db.session.commit()
+
+        return {}, 204
