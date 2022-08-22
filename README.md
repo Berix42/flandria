@@ -1,6 +1,16 @@
 # Flandria
 ![](/webapp/static/assets/logo.png?raw=True)
 
+[![Technical Debt](https://sonarcloud.io/api/project_badges/measure?project=Berix42_flandria&metric=sqale_index)](https://sonarcloud.io/summary/new_code?id=Berix42_flandria)
+[![Quality Gate Status](https://sonarcloud.io/api/project_badges/measure?project=Berix42_flandria&metric=alert_status)](https://sonarcloud.io/summary/new_code?id=Berix42_flandria)
+[![Reliability Rating](https://sonarcloud.io/api/project_badges/measure?project=Berix42_flandria&metric=reliability_rating)](https://sonarcloud.io/summary/new_code?id=Berix42_flandria)
+[![Duplicated Lines (%)](https://sonarcloud.io/api/project_badges/measure?project=Berix42_flandria&metric=duplicated_lines_density)](https://sonarcloud.io/summary/new_code?id=Berix42_flandria)
+[![Vulnerabilities](https://sonarcloud.io/api/project_badges/measure?project=Berix42_flandria&metric=vulnerabilities)](https://sonarcloud.io/summary/new_code?id=Berix42_flandria)
+[![Bugs](https://sonarcloud.io/api/project_badges/measure?project=Berix42_flandria&metric=bugs)](https://sonarcloud.io/summary/new_code?id=Berix42_flandria)
+[![Security Rating](https://sonarcloud.io/api/project_badges/measure?project=Berix42_flandria&metric=security_rating)](https://sonarcloud.io/summary/new_code?id=Berix42_flandria)
+[![Maintainability Rating](https://sonarcloud.io/api/project_badges/measure?project=Berix42_flandria&metric=sqale_rating)](https://sonarcloud.io/summary/new_code?id=Berix42_flandria)
+[![Code Smells](https://sonarcloud.io/api/project_badges/measure?project=Berix42_flandria&metric=code_smells)](https://sonarcloud.io/summary/new_code?id=Berix42_flandria)
+[![Lines of Code](https://sonarcloud.io/api/project_badges/measure?project=Berix42_flandria&metric=ncloc)](https://sonarcloud.io/summary/new_code?id=Berix42_flandria)
 
 Starting 01.01.2022, I stopped working on Flandria and took the website down.
 
