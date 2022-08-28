@@ -106,10 +106,9 @@ def register_api_endpoints() -> None:
     # Planner API
     planner_ns = api_.namespace("planner")
     planner_ns.add_resource(PlannerView, "/<classname>")
-    planner_ns.add_resource(PlannerBuildView,
-                            "/<string:classname>/builds",
-                            "/builds/<int:id>/delete",
-                            "/builds/add")
+    planner_ns.add_resource(PlannerBuildView, "/builds/<string:classname>", methods=['GET'])
+    planner_ns.add_resource(PlannerBuildView, "/builds", methods=['POST'])
+    planner_ns.add_resource(PlannerBuildView, "/builds/<int:id>", methods=['DELETE'])
     planner_ns.add_resource(PlannerStarView, "/builds/<int:build_id>/star")
 
     # Ranking API
