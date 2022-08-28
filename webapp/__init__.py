@@ -1,10 +1,9 @@
-from webapp.api.planner.planner_build import PlannerBuildView, PlannerStarView
 from database_updater.cli import drops_cli, updater_cli
 from flask import Flask
 
 from webapp.api.auth import LoginView, RegisterView
 from webapp.api.database import DetailedTableView, MapView, Search, TableView
-from webapp.api.planner import PlannerView
+from webapp.api.planner import PlannerView, PlannerBuildView, PlannerStarView
 from webapp.api.ranking import (GuildDetailedView, GuildOverviewView,
                                 RankingStatisticsView, PlayerDetailedView,
                                 PlayerOverviewView)
@@ -111,9 +110,7 @@ def register_api_endpoints() -> None:
                             "/<string:classname>/builds",
                             "/builds/<int:id>/delete",
                             "/builds/add")
-    planner_ns.add_resource(PlannerStarView,
-                            "/builds/<int:build_id>/star/add",
-                            "/builds/<int:build_id>/star/delete")
+    planner_ns.add_resource(PlannerStarView, "/builds/<int:build_id>/star")
 
     # Ranking API
     ranking_ns = api_.namespace("ranking")
