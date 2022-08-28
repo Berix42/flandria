@@ -4,7 +4,7 @@ import { getToken } from './AuthService';
 
 function addStar(buildId) {
   return Axios.post(
-    `${apiUrl}/planner/builds/${buildId}/star/add`,
+    `${apiUrl}/planner/builds/${buildId}/star`,
     {},
     { headers: { Authorization: `Bearer ${getToken()}` } },
   );
@@ -12,7 +12,7 @@ function addStar(buildId) {
 
 function deleteStar(buildId) {
   return Axios.delete(
-    `${apiUrl}/planner/builds/${buildId}/star/delete`,
+    `${apiUrl}/planner/builds/${buildId}/star`,
     { headers: { Authorization: `Bearer ${getToken()}` } },
   );
 }
