@@ -7,12 +7,12 @@ function getPlanner(classname) {
 }
 
 function getBuilds(classname) {
-  return Axios.get(`${apiUrl}/planner/${classname}/builds`);
+  return Axios.get(`${apiUrl}/planner/builds/${classname}`);
 }
 
 function addBuild(title, description, hash, characterClass) {
   return Axios.post(
-    `${apiUrl}/planner/builds/add`,
+    `${apiUrl}/planner/builds`,
     {
       // Backend checks field-names
       title, description, hash, character_class: characterClass,
@@ -23,7 +23,7 @@ function addBuild(title, description, hash, characterClass) {
 
 function deleteBuild(buildId) {
   return Axios.delete(
-    `${apiUrl}/planner/builds/${buildId}/delete`,
+    `${apiUrl}/planner/builds/${buildId}`,
     { headers: { Authorization: `Bearer ${getToken()}` } },
   );
 }
