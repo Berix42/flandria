@@ -71,7 +71,7 @@ const App = () => (
 
               <Route path="/ranking/statistics" exact element={<RankingStatistics />} />
               <Route path="/ranking/guilds" exact element={<GuildOverview />} />
-              <Route path="/ranking/guilds/:guildName+" exact element={<GuildView />} />
+              <Route path="/ranking/guilds/:guildName" exact element={<GuildView />} />
               <Route path="/ranking/players/:server/:name" exact element={<PlayerView />} />
 
               <Route path="*" element={<Error404Page />} />
