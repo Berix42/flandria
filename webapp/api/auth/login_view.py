@@ -16,14 +16,10 @@ class LoginView(Resource):
         elif not password:
             abort(400, "Password field is missing or empty.")
 
-        # Check if user exists
+        # Check if user exists and check password
         user: User = User.query.filter(User.username == username).first()
-        if user is None:
-            abort(404, "User does not exists.")
-
-        # Check password
-        if not user.check_password(password):
-            abort(401, "Password does not match.")
+        if (user is None) or (not user.check_password(password)):
+            abort(401, "Invalid credentials.")
 
         # Create JWT token
         access_token = create_access_token(
