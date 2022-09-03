@@ -1,42 +1,59 @@
 import re
 import typing
 
-from flask_restx import Resource, abort
+from flask_restx import Resource, abort, fields
 from sqlalchemy import or_
+
+from webapp.api.common_api_models import paginationData
 from webapp.api.database.constants import ALLOWED_DATABASE_TABLES
 from webapp.api.database.utils import get_model_from_tablename
 from webapp.api.utils import get_url_parameter
-from webapp.extensions import cache
+from webapp.extensions import cache, api_
 from webapp.models.enums import (AccessoryType, Area, EffectCode, EssenceEquipType,
                                  ProductionType, RatingType)
 
+tableRequestParser = api_.parser()
+tableRequestParser.add_argument('table', type=str, help='Unique string to identify a table.',
+                                choices=ALLOWED_DATABASE_TABLES)
+tableRequestParser.add_argument('page', type=int, help='Which data-block to select.', default=1)
+tableRequestParser.add_argument('order', type=str, help='Sorting order.', default="asc", choices=("asc", "desc"))
+tableRequestParser.add_argument('limit', type=int, help='Max number of items in a data-block.', default=60)
+tableRequestParser.add_argument('sort', type=str, help='Column to sort by, depends on selected table.', default="index")
+tableRequestParser.add_argument('area', type=int, help='Filter for Land(0) or Sea(1) area.', default=-1,
+                                choices=(-1, 0, 1))
+tableRequestParser.add_argument('filter', type=str, help='Filter fields, depend on selected table.', default="all")
+tableRequestParser.add_argument('minimal', type=int, help='Get minimal data output.', default=1, choices=(0, 1))
+# TODO: Find a way to document the effects-array in swagger
+# tableRequestParser.add_argument('effects', type=int, help='Effects for filtering.', action="split")
 
+
+tableData = api_.model('tableData', {
+    "items": fields.List(fields.Raw),
+    "pagination": fields.Nested(paginationData)
+})
+
+
+@api_.expect(tableRequestParser)
 class TableView(Resource):
+    @api_.marshal_with(tableData, code=200, description="Get table data")
+    @api_.response(404, 'Table does not exist.')
     def get(self, table: str):
         if table not in ALLOWED_DATABASE_TABLES:
             abort(404, "Table does not exist.")
 
         # Get filter from url parameters
-        current_page = get_url_parameter("page", int, 1)
-        order = get_url_parameter("order", str, "asc",
-                                  lambda v: v in ["asc", "desc"])
-        per_page = get_url_parameter("limit", int, 60)
-        sort_by = get_url_parameter("sort", str, "index")
-        area = get_url_parameter("area", int, -1,
-                                 lambda v: v in [-1, 0, 1])
-        filter_ = get_url_parameter("filter", str, "all")
-        minimal = get_url_parameter("minimal", bool, True)
+        req_args = tableRequestParser.parse_args()
         effects = get_url_parameter("effects", list, [])
 
         resp = self._get_response(
             table=table,
-            current_page=current_page,
-            order=order,
-            per_page=per_page,
-            sort_by=sort_by,
-            area=area,
-            filter_=filter_,
-            minimal=minimal,
+            current_page=req_args.page,
+            order=req_args.order,
+            per_page=req_args.limit,
+            sort_by=req_args.sort,
+            area=req_args.area,
+            filter_=req_args.filter,
+            minimal=bool(req_args.minimal),
             effects=effects
         )
 

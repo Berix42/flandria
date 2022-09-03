@@ -1,25 +1,39 @@
 import typing
 
-from flask_restx import Resource
+from flask_restx import Resource, abort, fields
 from sqlalchemy import func, text
+
+from webapp.api.common_api_models import paginationData, guildData
 from webapp.api.utils import get_url_parameter
 from webapp.models import RankingPlayer
 from webapp.models.enums import Server
-from webapp.extensions import cache
+from webapp.extensions import cache, api_
 
 
+guildOverviewRequestParser = api_.parser()
+guildOverviewRequestParser.add_argument('server', type=str, help='Unique string to identify a table.',
+                                        choices=["both"]+[s.name for s in Server], default="both")
+guildOverviewRequestParser.add_argument('page', type=int, help='Which data-block to select.', default=1)
+guildOverviewRequestParser.add_argument('limit', type=int, help='Max number of items in a data-block.', default=60)
+
+
+guildOverviewData = api_.model('guildOverviewData', {
+    "items": fields.List(fields.Nested(guildData)),
+    "pagination": fields.Nested(paginationData)
+})
+
+
+@api_.expect(guildOverviewRequestParser)
 class GuildOverviewView(Resource):
+    @api_.marshal_with(guildOverviewData, code=200, description="Get guild ranking data")
+    @api_.response(400, 'Unknown server')
     def get(self):
-        page = get_url_parameter("page", int, 1)
-        per_page = get_url_parameter("limit", int, 60)
-        server = get_url_parameter(
-            "server", str, "both",
-            lambda v: v in ["bergruen", "luxplena", "both"])
+        req_args = guildOverviewRequestParser.parse_args()
 
         resp = self._get_response(
-            server=server,
-            page=page,
-            per_page=per_page,
+            server=req_args.server,
+            page=req_args.page,
+            per_page=req_args.limit,
         )
 
         return resp, 200
@@ -51,8 +65,11 @@ class GuildOverviewView(Resource):
 
         # Apply server filter, if server is given
         if server != "both":
-            server_value = 0 if server == "luxplena" else 1
-            query = query.filter(RankingPlayer.server == Server(server_value))
+            try:
+                server_value = Server[server]
+            except ValueError:
+                abort(400, "Unknown server")
+            query = query.filter(RankingPlayer.server == server_value)
 
         # Create pagination based on query and return in
         pagination_obj = query.paginate(page=page, per_page=per_page)

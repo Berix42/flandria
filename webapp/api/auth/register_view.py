@@ -1,10 +1,15 @@
 from flask import request
 from flask_restx import Resource, abort
-from webapp.extensions import db
+
+from webapp.api.auth.login_view import credentialsRequestParser
+from webapp.extensions import db, api_
 from webapp.models import User
 
 
+@api_.expect(credentialsRequestParser)
 class RegisterView(Resource):
+    @api_.response(201, '')
+    @api_.response(400, '&lt;Error description&gt;')
     def post(self):
         content: dict = request.json
 

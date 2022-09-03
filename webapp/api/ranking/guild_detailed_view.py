@@ -1,10 +1,24 @@
-from flask_restx import Resource, abort
+from flask_restx import Resource, abort, fields
 from sqlalchemy import func
-from webapp.extensions import cache
+
+from webapp.api.common_api_models import guildData, playerData
+from webapp.extensions import cache, api_
 from webapp.models import RankingPlayer
 
 
+guildDetailRequestParser = api_.parser()
+guildDetailRequestParser.add_argument('name', type=str, help='Name of the guild the details are requested for.')
+
+guildDetailData = api_.model('guildDetailData', {
+    "guild": fields.Nested(guildData),
+    "members": fields.List(fields.Nested(playerData))
+})
+
+
+@api_.expect(guildDetailRequestParser)
 class GuildDetailedView(Resource):
+    @api_.marshal_with(guildDetailData, code=200, description="Get guild detail data")
+    @api_.response(404, 'Guild was not found.')
     def get(self, name: str):
 
         resp = self._get_response(name=name)
