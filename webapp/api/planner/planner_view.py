@@ -1,7 +1,7 @@
 from collections import OrderedDict
 
-from flask_restx import Resource, abort
-from webapp.extensions import cache
+from flask_restx import Resource, abort, fields
+from webapp.extensions import cache, api_
 from webapp.models import PlayerSkill, StatusData
 from webapp.models.enums import CharacterClass
 from collections import defaultdict
@@ -55,11 +55,19 @@ CLASSNAME_TO_LETTER = {
     "saint": "S",
 }
 
+plannerRequestParser = api_.parser()
+plannerRequestParser.add_argument('classname', type=str,
+                                  help='Unique string to identify a class to retrieve planner for',
+                                  choices=list(CLASSNAME_TO_SKILL_CODES.keys()))
 
+
+@api_.expect(plannerRequestParser)
 class PlannerView(Resource):
+    @api_.response(200, '')
+    @api_.response(404, 'Class not found')
     def get(self, classname: str):
         if classname not in CLASSNAME_TO_SKILL_CODES:
-            abort(404)
+            abort(404, 'Class not found')
 
         resp = self._get_response(classname)
 

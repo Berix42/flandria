@@ -1,17 +1,42 @@
-from flask_restx import Resource
+from flask_restx import Resource, fields
 from sqlalchemy import func
-from webapp.api.utils import get_url_parameter
-from webapp.extensions import db
+
+from webapp.api.common_api_models import characterClassData
+from webapp.extensions import db, api_
 from webapp.models import RankingPlayer
 from webapp.models.enums import CharacterClass, Server
 
 
+statisticRequestParser = api_.parser()
+statisticRequestParser.add_argument('min_level_land', type=int, default=1,
+                                    help='Minimum level of players to be included in the statistics.')
+
+
+statisticData = api_.model('statisticData', {
+    "character_counts": fields.Nested(api_.model('statisticCountData', {
+        "counts": fields.List(fields.Nested(api_.model('statisticCharacterCountData', {
+            "label": fields.String(description="Human readable name of class",
+                                   enum=list(CharacterClass.names().values())),
+            "class": fields.Nested(characterClassData),
+            "Bergruen": fields.Integer(min=0, example=1337,
+                                       description="Total number of player for the given class on Bergruen."),
+            "LuxPlena": fields.Integer(min=0, example=1337,
+                                       description="Total number of player for the given class on LuxPlena."),
+        }))),
+        "total_count_ber": fields.Integer(min=0, example=42, description="Total number of player on Bergruen."),
+        "total_count_lux": fields.Integer(min=0, example=42, description="Total number of player on LuxPlena."),
+    }))
+})
+
+
+@api_.expect(statisticRequestParser)
 class RankingStatisticsView(Resource):
+    @api_.marshal_with(statisticData, code=200, description="Get statistic data")
     def get(self):
-        min_level_land = get_url_parameter("min_level_land", int, 1)
+        req_args = statisticRequestParser.parse_args()
 
         resp = {
-            "character_counts": self._get_character_counts(min_level_land)
+            "character_counts": self._get_character_counts(req_args.min_level_land)
         }
 
         return resp, 200

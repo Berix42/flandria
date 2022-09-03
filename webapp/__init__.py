@@ -120,6 +120,5 @@ def register_api_endpoints() -> None:
     ranking_ns.add_resource(RankingStatisticsView, "/statistics")
     ranking_ns.add_resource(GuildOverviewView, "/guilds")
     ranking_ns.add_resource(GuildDetailedView, "/guilds/<path:name>")
-    ranking_ns.add_resource(PlayerOverviewView, "/players/<server>")
     ranking_ns.add_resource(PlayerOverviewView, "/players")
     ranking_ns.add_resource(PlayerDetailedView, "/players/<server>/<name>")

@@ -1,18 +1,28 @@
-from flask_restx import Resource
-from webapp.api.utils import get_url_parameter
-from webapp.extensions import cache
+from flask_restx import Resource, abort
+
+from webapp.api.common_api_models import playerData
+from webapp.extensions import cache, api_
 from webapp.models import RankingPlayer
 from webapp.models.enums import Server
-import typing
 
 
+playerRankingRequestParser = api_.parser()
+playerRankingRequestParser.add_argument('server', type=str, choices=[s.name for s in Server],
+                                        help='Server of the ranking.')
+playerRankingRequestParser.add_argument('min_lv_land', type=int, default=1,
+                                        help='Minimum level of players to be included in the ranking.')
+
+
+@api_.expect(playerRankingRequestParser)
 class PlayerOverviewView(Resource):
-    def get(self, server: typing.Optional[str] = None):
-        min_level_land = get_url_parameter("min_lv_land", int, 1)
+    @api_.marshal_with(playerData, code=200, description="Get player ranking data")
+    @api_.response(400, 'Unknown server')
+    def get(self):
+        req_args = playerRankingRequestParser.parse_args()
 
         resp = self._get_response(
-            server=server,
-            min_level_land=min_level_land
+            server=req_args.server,
+            min_level_land=req_args.min_lv_land
         )
 
         return resp, 200
@@ -31,7 +41,10 @@ class PlayerOverviewView(Resource):
         )
 
         if server:
-            server_value = 0 if server == "luxplena" else 1
-            query = query.filter(RankingPlayer.server == Server(server_value))
+            try:
+                server_value = Server[server]
+            except ValueError:
+                abort(400, "Unknown server")
+            query = query.filter(RankingPlayer.server == server_value)
 
         return [player.to_dict(minimal=True) for player in query.all()]
