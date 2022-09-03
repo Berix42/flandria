@@ -1,5 +1,6 @@
 import React from 'react';
 import { getImagePath, setWindowTitle } from '../../helpers';
+import { apiUrl } from '../../constants';
 
 const LandingPage = () => {
   setWindowTitle('Home');
@@ -15,6 +16,16 @@ const LandingPage = () => {
           that exist in the world of Florensia.
           Also included are a character builder which allows you to design your own character
           skilltree, as well as a list of all players and guilds across all servers!
+          The data of Flandria is publicly available. If you are interested in it then check out
+          {' '}
+          <a
+            href={apiUrl}
+            target="_blank"
+            rel="noreferrer"
+            className="underline decoration-sky-500 hover:text-blue-800 hover:font-semibold dark:hover:text-blue-300"
+          >
+            Flandria API
+          </a>
         </p>
       </div>
 
