@@ -7,19 +7,26 @@ const LandingPage = () => {
   return (
     <div className="flex flex-col items-center justify-center gap-y-10 lg:gap-20 lg:flex-row">
       <div className="max-w-3xl">
-        <span className="text-2xl tracking-wide text-gray-500 dark:text-white dark:text-opacity-90">Your Florensia Database</span>
-        <h2 className="mt-3 mb-5 text-5xl font-semibold tracking-tight text-gray-700 lg:text-8xl dark:text-white">Flandria</h2>
-        <p className="max-w-lg text-base font-thin leading-7 text-gray-500 dark:text-white dark:text-opacity-70">
+        <h1 className="mt-3 text-3xl font-semibold tracking-tight text-gray-700 lg:text-5xl dark:text-white">Welcome to Flandria</h1>
+        <h2 className="text-lg ml-1 mb-5 tracking-wide text-gray-500 dark:text-white dark:text-opacity-90">Your Florensia Database</h2>
+        <p className="max-w-lg ml-1 text-base font-thin leading-7 text-gray-500 dark:text-white dark:text-opacity-70">
           Flandria is an open-source database website for the MMORPG Florensia.
-          It provides a clean interface to view all available monsters, items and quest in the
-          world of Florensia.
-          Also included is a character builder, which allows you to design your own character
-          skilltree as well as maps, where you can view the locations of all monster.
+          It provides a clean interface for you to browse through all monsters, items and quests
+          that exist in the world of Florensia.
+          Also included are a character builder which allows you to design your own character
+          skilltree, as well as a list of all players and guilds across all servers!
         </p>
       </div>
 
-      <div className="max-w-md">
-        <img className="rounded-full" src={getImagePath('landing_page_image_small.png')} alt="Landing Page" />
+      <div className="max-w-md grid grid-cols-2 gap-4">
+        <img className="rounded-full h-32" src={getImagePath('chibis/1207xx_FLO_chibiExploF.png')} alt="Explorer Female" />
+        <img className="rounded-full h-32" src={getImagePath('chibis/1207xx_FLO_chibiExploM.png')} alt="Explorer Male" />
+        <img className="rounded-full h-32" src={getImagePath('chibis/1207xx_FLO_chibiMercF.png')} alt="Mercenary Female" />
+        <img className="rounded-full h-32" src={getImagePath('chibis/1207xx_FLO_chibiMercM.png')} alt="Mercenary Male" />
+        <img className="rounded-full h-32" src={getImagePath('chibis/1207xx_FLO_chibiNobF.png')} alt="Noble Female" />
+        <img className="rounded-full h-32" src={getImagePath('chibis/1207xx_FLO_chibiNobM.png')} alt="Noble Male" />
+        <img className="rounded-full h-32" src={getImagePath('chibis/1207xx_FLO_chibiSaintF.png')} alt="Saint Female" />
+        <img className="rounded-full h-32" src={getImagePath('chibis/1207xx_FLO_chibiSaintM.png')} alt="Saint Male" />
       </div>
     </div>
   );

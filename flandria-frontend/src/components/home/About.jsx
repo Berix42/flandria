@@ -21,11 +21,13 @@ const About = () => {
         The development of the original project by
         {' '}
         <a href="https://github.com/HealYouDown/flandria">Jeremy</a>
-         was stopped on 01.01.2022.
+        {' '}
+        was stopped on 01.01.2022.
         This website is is a fork of the original project, which is now hosted by
         {' '}
         <a href="https://www.giikugames.com">Giiku Games</a>
-         and presents a continued effort by the community to
+        {' '}
+        and presents a continued effort by the community to
         keep development going.
       </p>
 

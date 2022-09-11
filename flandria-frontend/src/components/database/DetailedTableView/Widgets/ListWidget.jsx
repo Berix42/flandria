@@ -62,6 +62,7 @@ const ItemListWidgetItem = ({ tablename, item, subs }) => {
         className="w-10 h-10 group-hover:border-opacity-100"
         tablename={tablename}
         icon={icon}
+        alt={name}
         rareGrade={rareGrade}
       />
     );

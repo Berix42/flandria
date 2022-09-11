@@ -92,19 +92,19 @@ const DetailedTableView = () => {
           <SkillWidget skills={data.skills} />
         </Column>
         {(data.quests.length > 0 || data.map_points.length > 0) && (
-        <Column md={4}>
-          <QuestsWidget quests={data.quests} />
-          <MonsterMapsWidget
-            monster={{
-              name: data.name,
-              icon: data.icon,
-              level: data.level,
-              area: data.area,
-              rating: data.rating,
-            }}
-            mapPoints={data.map_points}
-          />
-        </Column>
+          <Column md={4}>
+            <QuestsWidget quests={data.quests} />
+            <MonsterMapsWidget
+              monster={{
+                name: data.name,
+                icon: data.icon,
+                level: data.level,
+                area: data.area,
+                rating: data.rating,
+              }}
+              mapPoints={data.map_points}
+            />
+          </Column>
         )}
         <Column md={((data.quests.length > 0 || data.map_points.length > 0)) ? 4 : 8}>
           <DropsWidget drops={data.drops} />
@@ -491,9 +491,9 @@ const DetailedTableView = () => {
           <NPCShopItemsWidget items={data.shop_items} />
         </Column>
         {(data.quests.length > 0) && (
-        <Column md={4}>
-          <QuestsWidget quests={data.quests} />
-        </Column>
+          <Column md={4}>
+            <QuestsWidget quests={data.quests} />
+          </Column>
         )}
       </>
     );
@@ -505,10 +505,10 @@ const DetailedTableView = () => {
         <Column md={4}>
           <InformationWidget tablename={tablename} obj={data} />
           {data.before_quest && (
-            <QuestsWidget label="Before Quest" quests={[data.before_quest]} />
+            <QuestsWidget label="Previous Quest" quests={[data.before_quest]} />
           )}
           {data.after_quest && (
-            <QuestsWidget label="After Quest" quests={[data.after_quest]} />
+            <QuestsWidget label="Follow-up Quest" quests={[data.after_quest]} />
           )}
         </Column>
         <Column md={4}>

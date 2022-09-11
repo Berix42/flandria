@@ -35,6 +35,7 @@ const DetailedTableViewHeader = ({ tablename, item }) => {
             icon={iconName}
             tablename={iconTablename}
             rareGrade={rareGrade}
+            alt={itemName}
             className="w-10 h-10 mr-1.5 box-content border-opacity-100"
           />
           <h2 className="mt-0 text-2xl font-semibold text-gray-700 md:text-3xl dark:text-white">

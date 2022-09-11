@@ -1,4 +1,4 @@
-Sitemap: https://www.flandria.info/sitemap.txt
+Sitemap: https://www.flandria.wiki/sitemap.xml
 
 User-agent: *
 Disallow: /ranking/

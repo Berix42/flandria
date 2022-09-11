@@ -1,11 +1,14 @@
+import datetime
 import os
 import time
+from xml.dom import minidom
+from xml.etree import ElementTree as ET
 
 # import git
-from flask import (Blueprint, current_app, render_template, request,
-                   send_from_directory)
+from flask import Blueprint, current_app, render_template, request, send_from_directory
 from webapp.api.database.constants import ALLOWED_DATABASE_TABLES
 from webapp.api.database.utils import get_model_from_tablename
+
 # from webapp.main.check_git_signature import is_valid_signature
 from webapp.models import ItemList, Monster, Npc, Quest
 
@@ -85,7 +88,7 @@ def robots():
     return send_from_directory(current_app.static_folder, "robots.txt")
 
 
-@main_bp.route("/sitemap.txt")
+@main_bp.route("/sitemap.xml")
 def sitemap():
     base_url = "https://www.flandria.info"
 
@@ -123,9 +126,46 @@ def sitemap():
     for npc in Npc.query.all():
         urls.append(f"{base_url}/database/npc/{npc.code}")
 
-    result = "\n".join(urls)
+    # Create XML
+    # TODO: Recreate file if older than xx days
+    file_location = os.path.join(current_app.static_folder, 'sitemap.xml')
 
-    return result
+    if not os.path.exists(file_location):
+        # today = datetime.datetime.today()
+        # modified_date = datetime.datetime.fromtimestamp(
+        #     os.path.getmtime(file_location)
+        #     )
+        # duration = today - modified_date
+
+        root = ET.Element('urlset', xmlns="http://www.sitemaps.org/schemas/sitemap/0.9")
+
+        for item in urls:
+            url = ET.SubElement(root, 'url')
+
+            loc = ET.SubElement(url, 'loc')
+            loc.text = item
+
+        xml_string = minidom.parseString(ET.tostring(root)).toprettyxml(indent="    ")
+        xml_string = xml_string.replace('<?xml version="1.0" ?>', '<?xml version="1.0" encoding="UTF-8"?>')
+        with open(os.path.join(current_app.static_folder, 'sitemap.xml'), 'w+') as f:
+            f.write(xml_string)
+
+    # else:
+    #     if duration.days > 90:
+    #         root = ET.Element('urlset', xmlns="http://www.sitemaps.org/schemas/sitemap/0.9")
+
+    #         for item in urls:
+    #             url = ET.SubElement(root, 'url')
+
+    #             loc = ET.SubElement(url, 'loc')
+    #             loc.text = item
+
+    #         xml_string = minidom.parseString(ET.tostring(root)).toprettyxml(indent="    ")
+    #         xml_string = xml_string.replace('<?xml version="1.0" ?>', '')
+    #         with open(os.path.join(current_app.static_folder, 'sitemap.xml'), 'w+') as f:
+    #             f.write(xml_string)
+
+    return send_from_directory(current_app.static_folder, "sitemap.xml")
 
 
 """
