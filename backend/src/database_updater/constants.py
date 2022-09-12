@@ -28,7 +28,7 @@ if not os.path.exists(PALETTES_FOLDER):
     os.mkdir(PALETTES_FOLDER)
 
 PUBLIC_ASSETS_FOLDER = os.path.join(
-    ROOT_DIR, "flandria-frontend", "public", "assets")
+    ROOT_DIR, "..", "..", "flandria-frontend", "public", "assets")
 
 # Language to use for descriptions, names etc.
 LANGUAGE = "English"

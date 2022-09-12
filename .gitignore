@@ -2,7 +2,7 @@ env/
 __pycache__/
 .vscode/
 flandria-frontend/node_modules
-database_updater/temp
+**/database_updater/temp
 flandria-frontend/build
 data.json
 ranking.json
