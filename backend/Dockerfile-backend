@@ -7,14 +7,14 @@ RUN python -m venv venv
 ENV PATH="/home/flandria_user/flandria/venv/bin:$PATH"
 
 # Install requirements
-COPY requirements.txt .
+COPY backend/requirements.txt .
 RUN pip install -r requirements.txt
 
 # Copy only needed files from local repository
-COPY app.py run_stack/wsgi.py ./
-COPY migrations migrations
-COPY database_updater database_updater
-COPY webapp webapp
+COPY run_stack/wsgi.py ./
+COPY backend/src/migrations migrations
+COPY backend/src/database_updater database_updater
+COPY backend/src/webapp webapp
 
 FROM python:3.9-alpine
 

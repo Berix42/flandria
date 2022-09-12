@@ -8,7 +8,7 @@ services:
       - APP_ENV=${APP_ENV:-prod}
     volumes:
       - type: bind
-        source: ../database.db
+        source: ./database.db
         target: /home/flandria_user/flandria/database.db
         read_only: false
   frontend:
@@ -34,7 +34,7 @@ services:
       - VIRTUAL_PATH=~^/(api|swaggerui)
     volumes:
       - type: bind
-        source: ../database.db
+        source: ./database.db
         target: /home/flandria_user/flandria/database.db
         read_only: false
     depends_on:
