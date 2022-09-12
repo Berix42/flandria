@@ -14,15 +14,22 @@ jobs:
       - run: |
           python -m pip install --upgrade pip
           pip install -r requirements.txt
+        working-directory: backend
       - run: coverage run -m pytest
+        working-directory: backend
       - run: coverage xml
+        working-directory: backend
         if: always()
+      - name: Fix code coverage paths
+        if: always()
+        run: |
+          sed -i 's/\/home\/runner\/work\/flandria\/flandria\//\/github\/workspace\//g' backend/coverage.xml
       - name: Archive code coverage results
         if: always()  # Upload results even if test-step failed
         uses: actions/upload-artifact@v3
         with:
           name: backend-code-coverage-report
-          path: coverage.xml
+          path: backend/coverage.xml
 
   test-frontend:
     runs-on: ubuntu-latest
