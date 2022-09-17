@@ -1,12 +1,12 @@
 FROM node:bullseye AS build
 
 # Install frontend dependencies
-WORKDIR /home/flandria_user/flandria-frontend
-COPY flandria-frontend/package.json flandria-frontend/package-lock.json ./
+WORKDIR /home/flandria_user/frontend
+COPY frontend/package.json frontend/package-lock.json ./
 RUN npm install
 
 # Build frontend
-COPY flandria-frontend ./
+COPY frontend ./
 RUN npm run build
 
 # Move images to static folder, as currently flandria expects them there
@@ -15,5 +15,5 @@ RUN mv build/assets build/favicon.ico build/static/
 # Multi-stage build (copy needed files from previouse stage to decrease number of layers and size of resulting image)
 FROM nginx:alpine
 
-COPY --from=build /home/flandria_user/flandria-frontend/build /usr/share/nginx/html
+COPY --from=build /home/flandria_user/frontend/build /usr/share/nginx/html
 COPY run_stack/nginx.conf /etc/nginx/nginx.conf
