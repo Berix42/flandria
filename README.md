@@ -19,7 +19,7 @@ Folder            | Purpose
 ------------------|----------
 database_updater  | Populate database with data from online resource
 docs              | Keep track of documentation files
-flandria-frontend | Frontend files (assets / javascript etc.)
+frontend          | Frontend files (assets / javascript etc.)
 migrations        | Adjusting database scheme
 run_stack         | Deployment files (docker + config-files)
 webapp            | Backend files (application logic)
@@ -39,7 +39,7 @@ pip install -r requirements.txt
 ```
 Install requirements for frontend (nodejs installation required):
 ```commandline
-cd flandria-frontend
+cd frontend
 npm install
 ```
 Run backend for development:
@@ -49,7 +49,7 @@ FLASK_ENV=development FLASK_APP=app.py flask run --host=0.0.0.0 --port 5000
 ```
 Run frontend with hot-reload feature:
 ```commandline
-cd flandria-frontend
+cd frontend
 PORT=80 npm run start
 ```
 With running backend and running frontend check [localhost](http://localhost), you should now see the website.

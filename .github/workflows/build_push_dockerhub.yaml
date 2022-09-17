@@ -25,7 +25,7 @@ jobs:
         uses: docker/build-push-action@v3
         with:
           context: .
-          file: ./run_stack/Dockerfile-frontend
+          file: ./frontend/Dockerfile-frontend
           push: true
           tags: ${{ secrets.DOCKERHUB_USERNAME }}/flandria-frontend:latest
           cache-from: type=gha
