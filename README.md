@@ -95,34 +95,19 @@ docker info
 docker --version
 docker compose version
 ```
-After a successful installation, start by cloning the repository:
-```commandline
-git clone https://github.com/lauderandtaiga/flandria.git
-cd flandria
-```
+After a successful installation, get the [compose file](run_stack/docker-compose.yaml) from the repository.<br/>
 If the application is run in a development environment the server can be reached under [localhost](http://localhost/)
-and no site-name or ssl-certificate is needed.</br>
-If deploying to a production environment, **ssl-certificate** and the site-name is needed to properly configure the
-reverse proxy.
-Therefore, you should place your ssl-certificate in the ssl-cert-folder:
-```commandline
-cd run_stack/ssl_certs
-cp /etc/ssl/certs/my_ssl_cert.crt flandria.wiki.cert
-cp /etc/ssl/certs/my_ssl_key.key flandria.wiki.key
-```
-The certificate and key should be named after the virtual host with a .crt and .key extension. For example, if your
-site name is "flandria.wiki" you should have a flandria.wiki.crt and flandria.wiki.key file in the certs directory. Look
-[here](https://github.com/nginx-proxy/nginx-proxy) for more infos.</br>
-Specify your site-name on startup and run the application-stack in production:
+and no site-name or ssl-certification is needed.</br>
+If deploying to a production environment, the site-name is needed to properly configure the reverse proxy and automatic
+retrieve / renew the ssl-certificate:
 ```commandline
 APP_ENV=prod SITE_NAME=flandria.wiki docker compose up -d
 ```
+Optionally provide environment variable _CERT_MAIL_ to specify email address for certification renewal.<br/>
 Or for development on "localhost":
 ```commandline
 APP_ENV=dev docker compose up -d
 ```
-Hint: Leaving the "APP_ENV"-variable unset will result in production-behaviour. This is intended to prevent forgetting
-to supply the correct variable in production.</br>
 Open a browser and check if you can reach the server. Additional firewall-settings might be needed to open up ports
 80 (http) and 443 (https) to the internet.
 
