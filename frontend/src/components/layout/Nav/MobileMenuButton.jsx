@@ -57,6 +57,7 @@ const MobileSideMenu = ({ closeMenu, isLoggedIn }) => (
         <MobileMenuLink to="/planner/saint" onClick={closeMenu}>Saint</MobileMenuLink>
         <MobileMenuLink to="/planner/mercenary" onClick={closeMenu}>Mercenary</MobileMenuLink>
         <MobileMenuLink to="/planner/ship" onClick={closeMenu}>Ship</MobileMenuLink>
+        <MobileMenuLink to="/planner/routes" onClick={closeMenu}>Routes</MobileMenuLink>
       </MobileMenuSection>
       <MobileMenuSection header="More">
         <MobileMenuLink to="/map" onClick={closeMenu}>Maps</MobileMenuLink>

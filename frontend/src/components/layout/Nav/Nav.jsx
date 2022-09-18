@@ -134,6 +134,9 @@ const Nav = () => {
           <div className="py-1">
             <DropdownMenuLink to="/planner/ship">Ship</DropdownMenuLink>
           </div>
+          <div className="py-1">
+            <DropdownMenuLink to="/planner/routes">Routes</DropdownMenuLink>
+          </div>
         </DropdownMenu>
         <DropdownMenu
           button={(
