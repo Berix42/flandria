@@ -3,7 +3,7 @@ name: Run checks
 on: [push, pull_request]
 
 jobs:
-  test-backend:
+  unit-test-backend:
     runs-on: ubuntu-latest
     steps:
       - uses: actions/checkout@v3
@@ -31,7 +31,7 @@ jobs:
           name: backend-code-coverage-report
           path: backend/coverage.xml
 
-  test-frontend:
+  unit-test-frontend:
     runs-on: ubuntu-latest
     steps:
       - uses: actions/checkout@v3
@@ -56,7 +56,7 @@ jobs:
   sonar:
     runs-on: ubuntu-latest
     if: always()  # Run even if test-steps failed
-    needs: [ test-backend, test-frontend ]
+    needs: [ unit-test-backend, unit-test-frontend ]
     steps:
       - uses: actions/checkout@v3
         with:
@@ -75,3 +75,104 @@ jobs:
         env:
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
           SONAR_TOKEN: ${{ secrets.SONAR_TOKEN }}
+
+  build-docker:
+    name: build-${{ matrix.artifact-name }}
+    runs-on: ubuntu-latest
+    strategy:
+      fail-fast: false
+      matrix:
+        include:
+          - dockerfile: ./frontend/Dockerfile-frontend
+            image: ghcr.io/${{ github.repository }}/flandria-frontend
+            artifact-name: flandria-frontend
+          - dockerfile: ./backend/Dockerfile-backend
+            image: ghcr.io/${{ github.repository }}/flandria-backend
+            artifact-name: flandria-backend
+    steps:
+      - uses: actions/checkout@v3
+      - uses: docker/setup-buildx-action@v2
+      - name: Extract metadata (tags, labels) for Docker
+        id: meta
+        uses: docker/metadata-action@v4
+        with:
+          images: ${{ matrix.image }}
+          tags: type=raw,value=latest
+      - name: Build and store Docker image locally
+        uses: docker/build-push-action@v3
+        with:
+          context: .
+          file: ${{ matrix.dockerfile }}
+          tags: ${{ steps.meta.outputs.tags }}
+          labels: ${{ steps.meta.outputs.labels }}
+          outputs: type=docker,dest=/tmp/${{ matrix.artifact-name }}.tar
+      - name: Upload docker image for next job to use
+        uses: actions/upload-artifact@v3
+        with:
+          name: ${{ matrix.artifact-name }}
+          path: /tmp/${{ matrix.artifact-name }}.tar
+
+  integration-test:
+    name: test-${{ matrix.webdriver }}-${{ matrix.os }}
+    runs-on: ${{ matrix.os }}
+    needs: [ build-docker ]
+    strategy:
+      fail-fast: false
+      matrix:
+        os: [ubuntu-latest]
+        webdriver: [chrome, firefox, edge]
+        include:
+          - os: macos-latest
+            webdriver: safari
+    steps:
+      - name: Download frontend image from previous job
+        uses: actions/download-artifact@v3
+        with:
+          name: flandria-frontend
+          path: /tmp
+      - name: Download backend image from previous job
+        uses: actions/download-artifact@v3
+        with:
+          name: flandria-backend
+          path: /tmp
+      # Docker not installed on macOS-GitHub-runner, see https://github.com/actions/runner-images/issues/17
+      - name: Install Docker
+        uses: docker-practice/actions-setup-docker@master
+        if: startsWith(matrix.os, 'mac')
+        timeout-minutes: 30  # Prevent runaway-step
+      - uses: docker/setup-buildx-action@v2
+      - name: Load docker images from file-system
+        run: |
+          docker load --input /tmp/flandria-frontend.tar
+          docker load --input /tmp/flandria-backend.tar
+          docker image ls -a
+      - uses: actions/checkout@v3
+      - uses: actions/setup-python@v4
+        with:
+          python-version: '3.9'
+          cache: 'pip'
+      - run: |
+          python -m pip install --upgrade pip
+          pip install -r requirements.txt
+        working-directory: integration_tests
+      - name: Adjust repo in docker-compose.yaml
+        # Owner-name has to be lowercase in docker-compose-file
+        # Cannot use 'sed -i' because macOS handles it differently than linux, therefore using additional tmp-file
+        # See: https://stackoverflow.com/questions/21242932/sed-i-may-not-be-used-with-stdin-on-mac-os-x
+        run: |
+          owner_lc=`echo "${{ github.repository_owner }}" | awk '{print tolower($0)}'`
+          sed "s/lauderandtaiga/$owner_lc/g" run_stack/docker-compose.yaml > run_stack/docker-compose.yaml.new && mv run_stack/docker-compose.yaml.new run_stack/docker-compose.yaml
+      - name: Start containers
+        run: |
+          touch run_stack/database.db
+          docker compose -f run_stack/docker-compose.yaml up -d
+      - name: Run integration tests against containers
+        run: behave
+        env:
+          BEHAVE_WEBDRIVER: ${{ matrix.webdriver }}
+          # Avoid rate-limit for unauthenticated downloads of drivers from GitHub-repos by providing authentication
+          GH_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+        working-directory: integration_tests
+      - name: Stop containers
+        if: always()
+        run: docker compose -f run_stack/docker-compose.yaml down
