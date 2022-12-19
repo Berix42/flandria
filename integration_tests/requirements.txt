@@ -1,0 +1,2 @@
+pytest-bdd==6.0.1
+pytest-splinter==3.3.2
