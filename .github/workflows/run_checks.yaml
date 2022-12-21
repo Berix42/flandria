@@ -113,13 +113,17 @@ jobs:
           path: /tmp/${{ matrix.artifact-name }}.tar
 
   integration-test:
-    name: integration-test-${{ matrix.webdriver }}
-    runs-on: ubuntu-latest
+    name: test-${{ matrix.os }}-${{ matrix.webdriver }}
+    runs-on: ${{ matrix.os }}
     needs: [ build-docker ]
     strategy:
       fail-fast: false
       matrix:
+        os: [ubuntu-latest]
         webdriver: [chrome, firefox]
+        include:
+          - os: macos-latest
+            webdriver: safari
     steps:
       - name: Download frontend image from previous job
         uses: actions/download-artifact@v3
@@ -131,6 +135,10 @@ jobs:
         with:
           name: flandria-backend
           path: /tmp
+      # Docker not installed on macOS-GitHub-runner, see https://github.com/actions/runner-images/issues/17
+      - name: Install Docker
+        uses: docker-practice/actions-setup-docker@master
+        if: startsWith(matrix.os, 'mac')
       - uses: docker/setup-buildx-action@v2
       - name: Load docker images from file-system
         run: |
@@ -151,14 +159,12 @@ jobs:
           touch run_stack/database.db
           docker compose -f ./run_stack/docker-compose.yaml up -d
       - name: Run integration tests against containers
-        run: pytest --splinter-webdriver=${{ matrix.webdriver }} --splinter-screenshot-dir=test_failures
+        run: behave
+        env:
+          BEHAVE_WEBDRIVER: ${{ matrix.webdriver }}
+          # Avoid rate-limit for unauthenticated downloads of drivers from GitHub-repos by providing authentication
+          GH_TOKEN: ${{ secrets.GITHUB_TOKEN }}
         working-directory: integration_tests
-      - name: Upload test failure outputs
-        if: failure()
-        uses: actions/upload-artifact@v3
-        with:
-          name: test-failures-${{ matrix.webdriver }}
-          path: integration_tests/test_failures/
       - name: Stop containers
         if: always()
         run: docker compose -f ./run_stack/docker-compose.yaml down
