@@ -1,6 +1,5 @@
 from os import getenv
 from sys import platform
-from urllib.parse import urljoin
 
 from behave import use_fixture
 from behave_webdriver.driver import BehaveDriverMixin
@@ -18,8 +17,6 @@ from webdriver_manager.opera import OperaDriverManager
 def before_all(context):
     context.base_url = "http://localhost"
     setup_webdriver(context)
-    # Warmup backend by calling endpoint that accesses database
-    context.behave_driver.get(urljoin(context.base_url, "/database/monster"))
 
 
 def setup_webdriver(context):
