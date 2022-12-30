@@ -1,0 +1,14 @@
+version: "3.9"
+services:
+  update:
+    container_name: flandria_db_update
+    image: ghcr.io/lauderandtaiga/flandria/flandria-backend
+    command: >
+      sh -c "flask updater download && flask updater database"
+    environment:
+      - APP_ENV=${APP_ENV:-prod}
+    volumes:
+      - type: bind
+        source: ./database.db
+        target: /home/flandria_user/flandria/database.db
+        read_only: false

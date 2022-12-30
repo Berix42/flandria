@@ -162,10 +162,16 @@ jobs:
         run: |
           owner_lc=`echo "${{ github.repository_owner }}" | awk '{print tolower($0)}'`
           sed "s/lauderandtaiga/$owner_lc/g" run_stack/docker-compose.yaml > run_stack/docker-compose.yaml.new && mv run_stack/docker-compose.yaml.new run_stack/docker-compose.yaml
-      - name: Start containers
+          sed "s/lauderandtaiga/$owner_lc/g" run_stack/update-db-compose.yaml > run_stack/update-db-compose.yaml.new && mv run_stack/update-db-compose.yaml.new run_stack/update-db-compose.yaml
+      - name: Prepare data in database
         run: |
-          touch run_stack/database.db
-          docker compose -f run_stack/docker-compose.yaml up -d
+          touch database.db
+          docker compose -f docker-compose.yaml up migration
+          docker compose -f update-db-compose.yaml up
+        working-directory: run_stack
+      - name: Start containers
+        run: docker compose -f docker-compose.yaml up -d
+        working-directory: run_stack
       - name: Run integration tests against containers
         run: behave
         env:
