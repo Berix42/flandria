@@ -9,6 +9,8 @@ ENV PATH="/home/flandria_user/flandria/venv/bin:$PATH"
 # Install requirements
 COPY backend/requirements.txt .
 RUN pip install -r requirements.txt
+# Pillow requires special handelling
+RUN pip uninstall -y Pillow
 
 # Copy only needed files from local repository
 COPY run_stack/wsgi.py ./
@@ -27,6 +29,13 @@ COPY --from=build --chown=flandria_user /home/flandria_user/flandria .
 
 # Active virtual environment
 ENV PATH="/home/flandria_user/flandria/venv/bin:$PATH"
+
+# Install Pillow again on final image with all its dependencies
+RUN apk update \
+  && apk add --virtual build-dependencies gcc python3-dev musl-dev \
+  && apk add jpeg-dev zlib-dev libjpeg \
+  && pip install -r requirements.txt \
+  && apk del build-dependencies
 
 # Start webserver
 # Replace Flask internal server with Gunicorn (application server) for productional usage
